@@ -1,0 +1,67 @@
+{
+  "instagram_accounts": [
+    {
+      "handle": "peptidesinstitute",
+      "notes": "Clinical peptide education, strong research focus",
+      "priority": "high"
+    },
+    {
+      "handle": "drdavidharperpeptides",
+      "notes": "MD perspective, protocol-heavy",
+      "priority": "high"
+    },
+    {
+      "handle": "bioptimizers",
+      "notes": "Broad biohacking brand, high follower count",
+      "priority": "medium"
+    },
+    {
+      "handle": "foundmyfitness",
+      "notes": "Rhonda Patrick - longevity/research breakdown format",
+      "priority": "high"
+    },
+    {
+      "handle": "drhubermanlab",
+      "notes": "Andrew Huberman - carousel format, high engagement",
+      "priority": "high"
+    },
+    {
+      "handle": "longevity.io",
+      "notes": "Longevity science aggregator",
+      "priority": "medium"
+    },
+    {
+      "handle": "peptide_science",
+      "notes": "Niche competitor, peptide-specific",
+      "priority": "high"
+    },
+    {
+      "handle": "biohackingscience",
+      "notes": "Research translation, similar audience",
+      "priority": "medium"
+    }
+  ],
+  "reddit_communities": [
+    {
+      "subreddit": "r/Peptides",
+      "notes": "Primary peptide community, track hot posts weekly"
+    },
+    {
+      "subreddit": "r/longevity",
+      "notes": "Longevity research discussion"
+    },
+    {
+      "subreddit": "r/Biohackers",
+      "notes": "Broad biohacking community"
+    },
+    {
+      "subreddit": "r/NootropicsDepot",
+      "notes": "Supplement/peptide adjacent"
+    },
+    {
+      "subreddit": "r/Biohacking",
+      "notes": "Biohacking experiments and protocols"
+    }
+  ],
+  "last_updated": "2026-03-24"
+}

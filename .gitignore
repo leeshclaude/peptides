@@ -1,0 +1,8 @@
+.env
+__pycache__/
+*.pyc
+*.pyo
+.DS_Store
+data/research_briefs/*.md
+data/engagement_queue.md
+data/content_packages/
