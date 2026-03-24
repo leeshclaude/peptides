@@ -35,7 +35,6 @@ from telegram import (
     InlineKeyboardMarkup,
     Update,
 )
-from telegram.constants import ParseMode
 from telegram.ext import (
     Application,
     CallbackQueryHandler,
@@ -79,17 +78,15 @@ def load_calendar() -> dict:
 
 
 def get_pipeline_status() -> str:
-    lines = ["*@peptidealpharesearch Pipeline*\n"]
+    lines = ["@peptidealpharesearch Pipeline\n"]
 
-    # Research brief
     briefs = sorted(BRIEFS_DIR.glob("*.md"), reverse=True) if BRIEFS_DIR.exists() else []
     if briefs:
         age = (datetime.now() - datetime.fromtimestamp(briefs[0].stat().st_mtime)).days
-        lines.append(f"📄 *Brief:* {briefs[0].name} ({age}d old)")
+        lines.append(f"📄 Brief: {briefs[0].name} ({age}d old)")
     else:
-        lines.append("📄 *Brief:* None — run /research")
+        lines.append("📄 Brief: None — run /research")
 
-    # Calendar
     if CALENDAR_FILE.exists():
         cal = load_calendar()
         ideas = cal.get("ideas", [])
@@ -97,19 +94,18 @@ def get_pipeline_status() -> str:
         approved = sum(1 for i in ideas if i.get("status") == "approved")
         ready    = sum(1 for i in ideas if i.get("status") == "content_ready")
         posted   = sum(1 for i in ideas if i.get("status") == "posted")
-        lines.append(f"📅 *Calendar:* {pending} pending · {approved} approved · {ready} ready · {posted} posted")
+        lines.append(f"📅 Calendar: {pending} pending · {approved} approved · {ready} ready · {posted} posted")
         if pending:
             top = next(i for i in ideas if i.get("status") == "pending")
-            lines.append(f"   Top idea: _{top['title']}_")
+            lines.append(f"   Top idea: {top['title']}")
     else:
-        lines.append("📅 *Calendar:* Empty — run /ideation")
+        lines.append("📅 Calendar: Empty — run /ideation")
 
-    # Engagement queue
     if ENGAGEMENT_FILE.exists():
         age_h = (datetime.now() - datetime.fromtimestamp(ENGAGEMENT_FILE.stat().st_mtime)).total_seconds() / 3600
-        lines.append(f"💬 *Engagement:* Updated {age_h:.0f}h ago")
+        lines.append(f"💬 Engagement: Updated {age_h:.0f}h ago")
     else:
-        lines.append("💬 *Engagement:* None — run /engagement")
+        lines.append("💬 Engagement: None — run /engagement")
 
     return "\n".join(lines)
 
@@ -117,9 +113,9 @@ def get_pipeline_status() -> str:
 def format_ideas_message(ideas: list) -> tuple[str, Optional[InlineKeyboardMarkup]]:
     """Format ideas list with inline approve buttons for pending ones."""
     if not ideas:
-        return "No ideas in calendar yet\\. Run /ideation first\\.", None
+        return "No ideas in calendar yet. Run /ideation first.", None
 
-    lines = ["*Content Calendar*\n"]
+    lines = ["Content Calendar\n"]
     buttons = []
 
     status_emoji = {
@@ -136,12 +132,12 @@ def format_ideas_message(ideas: list) -> tuple[str, Optional[InlineKeyboardMarku
         title = idea.get("title", "Untitled")
         score = idea.get("priority_score", 0)
         day = idea.get("recommended_post_day", "")
-        lines.append(f"{emoji} *#{rank}* {title} \\[{score:.0f}\\] — {day}")
+        lines.append(f"{emoji} #{rank} {title} [{score:.0f}] — {day}")
 
         if status == "pending":
             buttons.append([
                 InlineKeyboardButton(
-                    f"✅ Approve #{rank}: {title[:30]}",
+                    f"Approve #{rank}: {title[:30]}",
                     callback_data=f"approve:{rank}",
                 )
             ])
@@ -180,17 +176,17 @@ def _run_content(idea_rank: int) -> str:
     package_path = run(idea_rank=idea_rank)
     package = json.loads(package_path.read_text())
 
-    lines = [f"*Content ready: {package.get('design_title', '')}*\n"]
+    lines = [f"Content ready: {package.get('design_title', '')}\n"]
     for slide in package.get("slides", []):
         header = slide.get("header", "")
         body = slide.get("body", "")
-        lines.append(f"*Slide {slide['slide_number']}* \\[{slide.get('role', '')}\\]")
-        lines.append(f"_{header}_")
+        lines.append(f"Slide {slide['slide_number']} [{slide.get('role', '')}]")
+        lines.append(header)
         if body:
             lines.append(body)
         lines.append("")
 
-    lines.append(f"*Caption preview:*\n{package.get('caption', '')[:400]}\\.\\.\\.")
+    lines.append(f"Caption preview:\n{package.get('caption', '')[:400]}...")
     return "\n".join(lines)
 
 
@@ -217,17 +213,17 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         return await deny(update)
 
     text = (
-        "*@peptidealpharesearch Bot*\n\n"
-        "Your agent control panel\\.\n\n"
-        "*/status* — Pipeline health check\n"
-        "*/research* — Run research agent\n"
-        "*/ideation* — Generate content ideas\n"
-        "*/list* — View calendar \\+ approve ideas\n"
-        "*/engagement* — Draft engagement comments\n"
-        "*/full* — Research \\+ ideation pipeline\n"
-        "*/help* — Show this message"
+        "@peptidealpharesearch Bot\n\n"
+        "Your agent control panel.\n\n"
+        "/status — Pipeline health check\n"
+        "/research — Run research agent\n"
+        "/ideation — Generate content ideas\n"
+        "/list — View calendar + approve ideas\n"
+        "/engagement — Draft engagement comments\n"
+        "/full — Research + ideation pipeline\n"
+        "/help — Show this message"
     )
-    await update.message.reply_text(text, parse_mode=ParseMode.MARKDOWN_V2)
+    await update.message.reply_text(text)
 
 
 async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -237,9 +233,7 @@ async def cmd_help(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
 async def cmd_status(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not is_allowed(update):
         return await deny(update)
-    await update.message.reply_text(
-        get_pipeline_status(), parse_mode=ParseMode.MARKDOWN_V2
-    )
+    await update.message.reply_text(get_pipeline_status())
 
 
 async def cmd_list(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
@@ -249,33 +243,23 @@ async def cmd_list(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     cal = load_calendar()
     ideas = cal.get("ideas", [])
     text, keyboard = format_ideas_message(ideas)
-    await update.message.reply_text(
-        text,
-        parse_mode=ParseMode.MARKDOWN_V2,
-        reply_markup=keyboard,
-    )
+    await update.message.reply_text(text, reply_markup=keyboard)
 
 
 async def cmd_research(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not is_allowed(update):
         return await deny(update)
 
-    msg = await update.message.reply_text(
-        "🔬 Running research agent\\.\\.\\. \\(this takes 1\\-2 minutes\\)",
-        parse_mode=ParseMode.MARKDOWN_V2,
-    )
+    msg = await update.message.reply_text("🔬 Running research agent... (1-2 minutes)")
 
     loop = asyncio.get_event_loop()
     try:
         result = await loop.run_in_executor(None, _run_research)
-        # Send as document if long, otherwise as message
         if len(result) > 3500:
-            await msg.edit_text("✅ Research brief ready\\. Sending\\.\\.\\.", parse_mode=ParseMode.MARKDOWN_V2)
-            await update.message.reply_text(
-                result[:4000], parse_mode=None
-            )
+            await msg.edit_text("✅ Research brief ready:")
+            await update.message.reply_text(result[:4000])
         else:
-            await msg.edit_text(result[:4000], parse_mode=None)
+            await msg.edit_text(result[:4000])
     except Exception as e:
         await msg.edit_text(f"❌ Research failed: {e}")
 
@@ -284,22 +268,15 @@ async def cmd_ideation(update: Update, context: ContextTypes.DEFAULT_TYPE) -> No
     if not is_allowed(update):
         return await deny(update)
 
-    msg = await update.message.reply_text(
-        "💡 Running ideation agent\\.\\.\\. \\(1\\-2 minutes\\)",
-        parse_mode=ParseMode.MARKDOWN_V2,
-    )
+    msg = await update.message.reply_text("💡 Running ideation agent... (1-2 minutes)")
 
     loop = asyncio.get_event_loop()
     try:
         new_ideas = await loop.run_in_executor(None, _run_ideation)
         text, keyboard = format_ideas_message(new_ideas)
-        await msg.edit_text(
-            f"✅ {len(new_ideas)} ideas generated\\!\n\n" + text,
-            parse_mode=ParseMode.MARKDOWN_V2,
-            reply_markup=keyboard,
-        )
+        await msg.edit_text(f"✅ {len(new_ideas)} ideas generated!\n\n" + text, reply_markup=keyboard)
     except FileNotFoundError:
-        await msg.edit_text("❌ No research brief found\\. Run /research first\\.", parse_mode=ParseMode.MARKDOWN_V2)
+        await msg.edit_text("❌ No research brief found. Run /research first.")
     except Exception as e:
         await msg.edit_text(f"❌ Ideation failed: {e}")
 
@@ -308,15 +285,12 @@ async def cmd_engagement(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
     if not is_allowed(update):
         return await deny(update)
 
-    msg = await update.message.reply_text(
-        "💬 Drafting engagement comments\\.\\.\\. \\(1\\-2 minutes\\)",
-        parse_mode=ParseMode.MARKDOWN_V2,
-    )
+    msg = await update.message.reply_text("💬 Drafting engagement comments... (1-2 minutes)")
 
     loop = asyncio.get_event_loop()
     try:
         result = await loop.run_in_executor(None, _run_engagement)
-        await msg.edit_text(result[:4000], parse_mode=None)
+        await msg.edit_text(result[:4000])
     except Exception as e:
         await msg.edit_text(f"❌ Engagement agent failed: {e}")
 
@@ -325,25 +299,18 @@ async def cmd_full(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not is_allowed(update):
         return await deny(update)
 
-    msg = await update.message.reply_text(
-        "🚀 Running full pipeline: research → ideation\\.\\.\\. \\(2\\-4 minutes\\)",
-        parse_mode=ParseMode.MARKDOWN_V2,
-    )
+    msg = await update.message.reply_text("🚀 Running full pipeline: research → ideation... (2-4 minutes)")
 
     loop = asyncio.get_event_loop()
     try:
-        await msg.edit_text("🔬 Step 1/2: Running research agent\\.\\.\\.", parse_mode=ParseMode.MARKDOWN_V2)
+        await msg.edit_text("🔬 Step 1/2: Running research agent...")
         await loop.run_in_executor(None, _run_research)
 
-        await msg.edit_text("💡 Step 2/2: Running ideation agent\\.\\.\\.", parse_mode=ParseMode.MARKDOWN_V2)
+        await msg.edit_text("💡 Step 2/2: Running ideation agent...")
         new_ideas = await loop.run_in_executor(None, _run_ideation)
 
         text, keyboard = format_ideas_message(new_ideas)
-        await msg.edit_text(
-            f"✅ Pipeline complete\\! {len(new_ideas)} ideas ready\\.\n\n" + text,
-            parse_mode=ParseMode.MARKDOWN_V2,
-            reply_markup=keyboard,
-        )
+        await msg.edit_text(f"✅ Pipeline complete! {len(new_ideas)} ideas ready.\n\n" + text, reply_markup=keyboard)
     except Exception as e:
         await msg.edit_text(f"❌ Pipeline failed: {e}")
 
@@ -360,22 +327,15 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     data = query.data
     if data.startswith("approve:"):
         rank = int(data.split(":")[1])
-        await query.edit_message_text(
-            f"🎨 Generating content package for idea \\#{rank}\\.\\.\\. \\(1\\-2 minutes\\)",
-            parse_mode=ParseMode.MARKDOWN_V2,
-        )
+        await query.edit_message_text(f"🎨 Generating content package for idea #{rank}... (1-2 minutes)")
 
         loop = asyncio.get_event_loop()
         try:
             result = await loop.run_in_executor(None, _approve_and_create, rank)
-            # Send in chunks if long
             chunks = [result[i:i+4000] for i in range(0, min(len(result), 8000), 4000)]
-            await query.edit_message_text(
-                f"✅ Content package ready for idea \\#{rank}\\!",
-                parse_mode=ParseMode.MARKDOWN_V2,
-            )
+            await query.edit_message_text(f"✅ Content package ready for idea #{rank}!")
             for chunk in chunks:
-                await query.message.reply_text(chunk[:4000], parse_mode=None)
+                await query.message.reply_text(chunk[:4000])
             await query.message.reply_text(
                 "Open Claude Code and say:\n\"Update Canva with the latest content package\""
             )
