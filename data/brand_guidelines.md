@@ -63,13 +63,11 @@
 
 ```python
 CANVA_TEMPLATES = {
-    "research_breakdown": "REPLACE_WITH_TEMPLATE_ID",   # 7-slide carousel: hook + 5 content + CTA
-    "protocol_deep_dive": "REPLACE_WITH_TEMPLATE_ID",   # 8-slide carousel: hook + 6 content + CTA
-    "myth_busting": "REPLACE_WITH_TEMPLATE_ID",         # 6-slide carousel: myth + reality x2 + evidence + CTA
-    "mechanism_explainer": "REPLACE_WITH_TEMPLATE_ID",  # 7-slide carousel: hook + pathway + steps + CTA
-    "single_stat": "REPLACE_WITH_TEMPLATE_ID",          # 1-slide infographic
+    "carousel": "DAHEVyvHuDg",  # 8-slide: hook + supporting hook + 5 content + CTA
 }
 ```
+
+Skill: `canva-peptide-carousel.skill` (root of repo) — handles full carousel creation via Canva MCP.
 
 ---
 

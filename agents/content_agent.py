@@ -92,11 +92,11 @@ def generate_content_package(idea: dict, client: anthropic.Anthropic) -> dict:
 
     template_type = _infer_template_type(idea.get("pillar", ""))
     structure = get_template_structure(template_type)
-    slide_count = structure["slide_count"] if structure else 7
+    slide_count = structure["slide_count"] if structure else 8
 
     response = client.messages.create(
         model="claude-sonnet-4-6",
-        max_tokens=3000,
+        max_tokens=4000,
         system=system_prompt,
         messages=[
             {
@@ -106,27 +106,26 @@ def generate_content_package(idea: dict, client: anthropic.Anthropic) -> dict:
 ## Idea Brief
 Title: {idea.get('title')}
 Pillar: {idea.get('pillar')}
-Hook: {idea.get('hook')}
+Hook angle: {idea.get('hook')}
 Hook subtext: {idea.get('hook_subtext', '')}
 Slide outline:
 {chr(10).join(idea.get('slide_outline', []))}
-CTA: {idea.get('cta')}
+CTA / engagement question: {idea.get('cta')}
 Hashtags: {', '.join(idea.get('hashtags', []))}
 Source material: {idea.get('source_material')}
 
-## Template Type
-{template_type} ({slide_count} slides)
-
-## Brand Guidelines (excerpt)
-{brand_guidelines[:1500]}
+## Template
+Canva design ID: DAHEVyvHuDg ({slide_count} slides)
 
 ## Requirements
 - Return ONLY a valid JSON object (no markdown wrapper)
-- Follow the exact schema in your system prompt
-- Slide copy should be punchy, data-driven, specific
-- Caption: 150-250 words, ends with CTA
-- Include the full hashtag list at the end of the caption
-- design_title should be descriptive and include today's date: {datetime.now().strftime('%Y-%m-%d')}""",
+- Follow the exact JSON schema in your system prompt
+- Slide 1: ALL CAPS, 10–15 words, body must be null
+- Slides 2–7: header (hook, never a descriptive label) + body (friend-explaining tone, no jargon, no citations)
+- Slide 8: header = "Follow @peptidealpharesearch", body = one engagement question only
+- Each slide must have a detailed image_prompt (minimum 6 lines)
+- Caption: 8–12 sentences of NEW info not on the slides, plus citations with live URLs
+- design_title: topic name + {datetime.now().strftime('%Y-%m-%d')}""",
             }
         ],
     )
@@ -149,14 +148,8 @@ Source material: {idea.get('source_material')}
 
 
 def _infer_template_type(pillar: str) -> str:
-    mapping = {
-        "Research Breakdown": "research_breakdown",
-        "Protocol Deep Dive": "protocol_deep_dive",
-        "Myth Busting": "myth_busting",
-        "Mechanism Explainer": "mechanism_explainer",
-        "Biohacker Profile": "research_breakdown",  # fallback
-    }
-    return mapping.get(pillar, "research_breakdown")
+    # All content types use the single 8-slide carousel template (DAHEVyvHuDg)
+    return "carousel"
 
 
 def run(idea_rank: Optional[int] = None) -> Path:
@@ -213,7 +206,8 @@ def run(idea_rank: Optional[int] = None) -> Path:
     print(f"\n  Design title: {package.get('design_title')}")
     print(f"\n  Slides to populate ({len(package.get('slides', []))}):")
     for slide in package.get("slides", []):
-        print(f"    Slide {slide['slide_number']}: {slide.get('headline', '')[:60]}")
+        header = slide.get("header", slide.get("headline", ""))
+        print(f"    Slide {slide['slide_number']} [{slide.get('role', '')}]: {header[:60]}")
 
     print(f"\n  Caption preview:")
     caption_preview = package.get("caption", "")[:200]

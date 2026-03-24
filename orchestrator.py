@@ -77,9 +77,10 @@ def run_content(idea_rank: Optional[int] = None) -> bool:
         print(f"\n✓ Content package: {output}")
         print("\n── Next Steps ────────────────────────────────────────")
         print("  1. Open the content package JSON in data/content_packages/")
-        print("  2. Ask Claude Code to create the Canva design:")
-        print('     "Create a Canva carousel using the content package at [path]"')
-        print("  3. Export from Canva and schedule for posting")
+        print("  2. Ask Claude Code to update Canva:")
+        print('     "Update Canva with the content package at [path]"')
+        print("     Claude will use the canva-peptide-carousel skill (template DAHEVyvHuDg)")
+        print("  3. Review thumbnail previews, approve, then export and schedule")
         return True
     except Exception as e:
         print(f"\n✗ Content agent failed: {e}")

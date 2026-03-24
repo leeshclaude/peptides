@@ -3,18 +3,18 @@ Canva template ID management and brand configuration for @peptidealpharesearch.
 Used by the content creation agent when calling Canva MCP tools.
 """
 from typing import Optional, List
+
 # ─── Template IDs ─────────────────────────────────────────────────────────────
-# Replace these with your actual Canva template design IDs.
-# To find an ID: open design in Canva → URL contains /design/DAF_XXXXXXXX/
+# Primary carousel template — 8-slide format used for all content types.
+# Skill: canva-peptide-carousel.skill
 # ──────────────────────────────────────────────────────────────────────────────
 
 CANVA_TEMPLATES = {
-    "research_breakdown": None,    # 7-slide: hook + 5 content + CTA
-    "protocol_deep_dive": None,    # 8-slide: hook + 6 content + CTA
-    "myth_busting": None,          # 6-slide: myth + reality x2 + evidence + CTA
-    "mechanism_explainer": None,   # 7-slide: hook + pathway + steps + CTA
-    "single_stat": None,           # 1-slide infographic
+    "carousel": "DAHEVyvHuDg",     # 8-slide: hook + supporting hook + 5 content + CTA
 }
+
+# Convenience alias — the default template for all carousel content
+DEFAULT_TEMPLATE_ID = CANVA_TEMPLATES["carousel"]
 
 # ─── Brand Colors ──────────────────────────────────────────────────────────────
 
@@ -26,67 +26,98 @@ BRAND_COLORS = {
     "text_dark": "#1A1A2E",        # Near-black
 }
 
-# ─── Slide Structure Definitions ───────────────────────────────────────────────
+# ─── Slide Structure (matches canva-peptide-carousel.skill) ────────────────────
+#
+# Slide 1 — Hook only (ALL CAPS, 10–15 words, no body text)
+# Slide 2 — Supporting hook (header + body, 2–3 sentences)
+# Slides 3–6 — Content build (header hook + body, one idea per slide)
+# Slide 7 — Payoff/revelation (header + body)
+# Slide 8 — CTA: "Follow @peptidealpharesearch" + engagement question
+# ──────────────────────────────────────────────────────────────────────────────
 
 TEMPLATE_STRUCTURES = {
-    "research_breakdown": {
-        "slide_count": 7,
-        "slides": [
-            {"index": 0, "role": "hook",       "max_words": 8,  "has_subtext": True},
-            {"index": 1, "role": "context",    "max_words": 40, "has_subtext": False},
-            {"index": 2, "role": "finding_1",  "max_words": 40, "has_subtext": False},
-            {"index": 3, "role": "finding_2",  "max_words": 40, "has_subtext": False},
-            {"index": 4, "role": "mechanism",  "max_words": 40, "has_subtext": False},
-            {"index": 5, "role": "takeaway",   "max_words": 40, "has_subtext": False},
-            {"index": 6, "role": "cta",        "max_words": 15, "has_subtext": True},
-        ],
-    },
-    "protocol_deep_dive": {
+    "carousel": {
         "slide_count": 8,
         "slides": [
-            {"index": 0, "role": "hook",       "max_words": 8,  "has_subtext": True},
-            {"index": 1, "role": "overview",   "max_words": 40, "has_subtext": False},
-            {"index": 2, "role": "dosing",     "max_words": 40, "has_subtext": False},
-            {"index": 3, "role": "timing",     "max_words": 40, "has_subtext": False},
-            {"index": 4, "role": "synergies",  "max_words": 40, "has_subtext": False},
-            {"index": 5, "role": "evidence",   "max_words": 40, "has_subtext": False},
-            {"index": 6, "role": "cautions",   "max_words": 40, "has_subtext": False},
-            {"index": 7, "role": "cta",        "max_words": 15, "has_subtext": True},
-        ],
-    },
-    "myth_busting": {
-        "slide_count": 6,
-        "slides": [
-            {"index": 0, "role": "hook",       "max_words": 8,  "has_subtext": True},
-            {"index": 1, "role": "myth_1",     "max_words": 40, "has_subtext": False},
-            {"index": 2, "role": "reality_1",  "max_words": 40, "has_subtext": False},
-            {"index": 3, "role": "myth_2",     "max_words": 40, "has_subtext": False},
-            {"index": 4, "role": "evidence",   "max_words": 40, "has_subtext": False},
-            {"index": 5, "role": "cta",        "max_words": 15, "has_subtext": True},
-        ],
-    },
-    "mechanism_explainer": {
-        "slide_count": 7,
-        "slides": [
-            {"index": 0, "role": "hook",       "max_words": 8,  "has_subtext": True},
-            {"index": 1, "role": "what_is_it", "max_words": 40, "has_subtext": False},
-            {"index": 2, "role": "step_1",     "max_words": 40, "has_subtext": False},
-            {"index": 3, "role": "step_2",     "max_words": 40, "has_subtext": False},
-            {"index": 4, "role": "step_3",     "max_words": 40, "has_subtext": False},
-            {"index": 5, "role": "outcome",    "max_words": 40, "has_subtext": False},
-            {"index": 6, "role": "cta",        "max_words": 15, "has_subtext": True},
+            {
+                "index": 0,
+                "role": "hook",
+                "description": "ALL CAPS scroll-stopper, 10–15 words, no body text",
+                "has_header": True,
+                "has_body": False,
+                "header_style": "ALL CAPS",
+                "header_min_words": 10,
+                "header_max_words": 15,
+            },
+            {
+                "index": 1,
+                "role": "supporting_hook",
+                "description": "Second hook that extends/reframes Slide 1, sets up the problem",
+                "has_header": True,
+                "has_body": True,
+                "body_max_sentences": 3,
+            },
+            {
+                "index": 2,
+                "role": "problem",
+                "description": "Establish the problem or gap in mainstream thinking",
+                "has_header": True,
+                "has_body": True,
+                "body_max_sentences": 4,
+            },
+            {
+                "index": 3,
+                "role": "mechanism",
+                "description": "Introduce the mechanism or research — get specific",
+                "has_header": True,
+                "has_body": True,
+                "body_max_sentences": 4,
+            },
+            {
+                "index": 4,
+                "role": "insight",
+                "description": "Surprising detail, stat, or counterintuitive insight",
+                "has_header": True,
+                "has_body": True,
+                "body_max_sentences": 4,
+            },
+            {
+                "index": 5,
+                "role": "possibility",
+                "description": "Pivot toward what's different — hint at change",
+                "has_header": True,
+                "has_body": True,
+                "body_max_sentences": 4,
+            },
+            {
+                "index": 6,
+                "role": "payoff",
+                "description": "The aha moment — what the reader now knows/believes",
+                "has_header": True,
+                "has_body": True,
+                "body_max_sentences": 3,
+            },
+            {
+                "index": 7,
+                "role": "cta",
+                "description": "Header: 'Follow @peptidealpharesearch'. Body: one engagement question only.",
+                "has_header": True,
+                "has_body": True,
+                "header_fixed": "Follow @peptidealpharesearch",
+                "body_max_sentences": 1,
+            },
         ],
     },
 }
 
 # ─── Helper Functions ──────────────────────────────────────────────────────────
 
-def get_template_id(template_type: str) -> Optional[str]:
-    """Return the Canva template ID for the given type, or None if not configured."""
+def get_template_id(template_type: str = "carousel") -> Optional[str]:
+    """Return the Canva template ID for the given type."""
     return CANVA_TEMPLATES.get(template_type)
 
 
-def get_template_structure(template_type: str) -> Optional[dict]:
+def get_template_structure(template_type: str = "carousel") -> Optional[dict]:
     """Return the slide structure definition for a template type."""
     return TEMPLATE_STRUCTURES.get(template_type)
 
@@ -107,16 +138,28 @@ def validate_slide_copy(template_type: str, slides: List[dict]) -> List[str]:
             f"Expected {expected_count} slides for {template_type}, got {len(slides)}"
         )
 
-    for i, (slide_def, slide_copy) in enumerate(
-        zip(structure["slides"], slides), start=1
-    ):
-        headline = slide_copy.get("headline", "")
-        word_count = len(headline.split())
-        max_words = slide_def["max_words"]
-        if word_count > max_words:
-            warnings.append(
-                f"Slide {i} ({slide_def['role']}): {word_count} words exceeds max {max_words}"
-            )
+    for slide_def, slide_copy in zip(structure["slides"], slides):
+        i = slide_def["index"] + 1
+        header = slide_copy.get("header", slide_copy.get("headline", ""))
+
+        # Check hook word count
+        if slide_def["role"] == "hook":
+            word_count = len(header.split())
+            if word_count < slide_def.get("header_min_words", 0):
+                warnings.append(f"Slide {i} (hook): {word_count} words — minimum is {slide_def['header_min_words']}")
+            if word_count > slide_def.get("header_max_words", 999):
+                warnings.append(f"Slide {i} (hook): {word_count} words — maximum is {slide_def['header_max_words']}")
+            if header != header.upper():
+                warnings.append(f"Slide {i} (hook): header must be ALL CAPS")
+
+        # Check body exists when required
+        if slide_def["has_body"] and not slide_copy.get("body"):
+            warnings.append(f"Slide {i} ({slide_def['role']}): missing body text")
+
+        # Check CTA header
+        if slide_def["role"] == "cta" and "fixed" in slide_def.get("header_fixed", ""):
+            if "peptidealpharesearch" not in header.lower():
+                warnings.append(f"Slide {i} (cta): header should include @peptidealpharesearch")
 
     return warnings
 
