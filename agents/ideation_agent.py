@@ -11,10 +11,10 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-import anthropic
 from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
+from tools.llm import call_llm
 
 load_dotenv()
 
@@ -33,7 +33,7 @@ def load_brand_guidelines() -> str:
     return BRAND_FILE.read_text()
 
 
-def get_latest_brief() -> tuple[Path, str]:
+def get_latest_brief() -> tuple:
     """Find and return the most recent research brief."""
     brief_files = sorted(BRIEFS_DIR.glob("*.md"), reverse=True)
     if not brief_files:
@@ -45,7 +45,6 @@ def get_latest_brief() -> tuple[Path, str]:
 
 
 def load_existing_calendar() -> dict:
-    """Load existing content calendar (to avoid duplicate ideas)."""
     if CALENDAR_FILE.exists():
         return json.loads(CALENDAR_FILE.read_text())
     return {"ideas": []}
@@ -56,12 +55,7 @@ def extract_existing_titles(calendar: dict) -> List[str]:
 
 
 def run(brief_path: Optional[Path] = None) -> Path:
-    """
-    Run the ideation agent from the latest (or specified) research brief.
-    Returns path to updated content_calendar.json.
-    """
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
-
+    """Run the ideation agent from the latest (or specified) research brief."""
     print("[Ideation Agent] Loading research brief...")
 
     if brief_path is None:
@@ -77,21 +71,12 @@ def run(brief_path: Optional[Path] = None) -> Path:
     existing_titles = extract_existing_titles(existing_calendar)
 
     existing_titles_str = (
-        "\n".join(f"- {t}" for t in existing_titles)
-        if existing_titles
-        else "None yet"
+        "\n".join(f"- {t}" for t in existing_titles) if existing_titles else "None yet"
     )
 
     print("  Generating content ideas...")
 
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=4096,
-        system=system_prompt,
-        messages=[
-            {
-                "role": "user",
-                "content": f"""Generate 7 ranked carousel ideas based on this research brief.
+    user_prompt = f"""Generate 7 ranked carousel ideas based on this research brief.
 
 ## Research Brief
 {brief_content}
@@ -108,14 +93,11 @@ def run(brief_path: Optional[Path] = None) -> Path:
 - Rank by priority_score (highest first)
 - Include recommended_post_day and recommended_post_time_est for each idea
 - Make hooks punchy, specific, and data-driven
-- Today's date: {datetime.now().strftime("%Y-%m-%d")}""",
-            }
-        ],
-    )
+- Today's date: {datetime.now().strftime("%Y-%m-%d")}"""
 
-    raw_response = response.content[0].text.strip()
+    raw_response = call_llm(system=system_prompt, user=user_prompt, max_tokens=4096).strip()
 
-    # Strip markdown code blocks if Claude wrapped it
+    # Strip markdown code blocks if model wrapped it
     if raw_response.startswith("```"):
         lines = raw_response.split("\n")
         raw_response = "\n".join(lines[1:-1])
@@ -132,19 +114,15 @@ def run(brief_path: Optional[Path] = None) -> Path:
     calendar["last_updated"] = datetime.now().isoformat()
     calendar["generated_from_brief"] = brief_path.name
 
-    # Add status field to each new idea
     for idea in new_ideas:
-        idea["status"] = "pending"           # pending | approved | created | posted
+        idea["status"] = "pending"
         idea["created_at"] = datetime.now().isoformat()
         idea["brief_source"] = brief_path.name
 
-    # Prepend new ideas (most recent first)
     calendar["ideas"] = new_ideas + calendar.get("ideas", [])
-
     CALENDAR_FILE.write_text(json.dumps(calendar, indent=2))
     print(f"[Ideation Agent] Added {len(new_ideas)} ideas to {CALENDAR_FILE}")
 
-    # Print summary
     print("\n── Content Ideas Generated ──────────────────────────")
     for idea in new_ideas:
         print(

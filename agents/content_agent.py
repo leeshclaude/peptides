@@ -17,10 +17,10 @@ import sys
 from datetime import datetime
 from pathlib import Path
 
-import anthropic
 from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
+from tools.llm import call_llm
 from tools.canva_helpers import (
     get_template_id,
     get_template_structure,
@@ -85,8 +85,8 @@ def approve_idea(idea_rank: int, calendar: dict) -> Optional[dict]:
     return None
 
 
-def generate_content_package(idea: dict, client: anthropic.Anthropic) -> dict:
-    """Use Claude to generate finalized slide copy and caption for an idea."""
+def generate_content_package(idea: dict) -> dict:
+    """Generate finalized slide copy and caption for an idea."""
     system_prompt = load_system_prompt()
     brand_guidelines = BRAND_FILE.read_text()
 
@@ -94,14 +94,7 @@ def generate_content_package(idea: dict, client: anthropic.Anthropic) -> dict:
     structure = get_template_structure(template_type)
     slide_count = structure["slide_count"] if structure else 8
 
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=4000,
-        system=system_prompt,
-        messages=[
-            {
-                "role": "user",
-                "content": f"""Generate the complete content package for this carousel idea.
+    user_prompt = f"""Generate the complete content package for this carousel idea.
 
 ## Idea Brief
 Title: {idea.get('title')}
@@ -125,12 +118,9 @@ Canva design ID: DAHEVyvHuDg ({slide_count} slides)
 - Slide 8: header = "Follow @peptidealpharesearch", body = one engagement question only
 - Each slide must have a detailed image_prompt (minimum 6 lines)
 - Caption: 8–12 sentences of NEW info not on the slides, plus citations with live URLs
-- design_title: topic name + {datetime.now().strftime('%Y-%m-%d')}""",
-            }
-        ],
-    )
+- design_title: topic name + {datetime.now().strftime('%Y-%m-%d')}"""
 
-    raw = response.content[0].text.strip()
+    raw = call_llm(system=system_prompt, user=user_prompt, max_tokens=4000).strip()
     if raw.startswith("```"):
         lines = raw.split("\n")
         raw = "\n".join(lines[1:-1])
@@ -159,7 +149,6 @@ def run(idea_rank: Optional[int] = None) -> Path:
     If idea_rank is provided, that idea will be approved and processed.
     If None, processes the highest-ranked approved idea.
     """
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     calendar = load_calendar()
 
     if idea_rank is not None:
@@ -180,7 +169,7 @@ def run(idea_rank: Optional[int] = None) -> Path:
     print(f"[Content Agent] Generating content package for: {idea['title']}")
 
     print("  Generating slide copy and caption...")
-    package = generate_content_package(idea, client)
+    package = generate_content_package(idea)
 
     # Save content package
     OUTPUT_DIR.mkdir(parents=True, exist_ok=True)

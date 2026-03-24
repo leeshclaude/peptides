@@ -14,11 +14,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import List, Optional
 
-import anthropic
 import requests
 from dotenv import load_dotenv
 
 sys.path.insert(0, str(Path(__file__).parent.parent))
+from tools.llm import call_llm
 
 load_dotenv()
 
@@ -58,11 +58,8 @@ def fetch_instagram_posts_context(handle: str) -> str:
     return f"Instagram account: @{handle} — search for their most recent posts (last 24-48 hours)"
 
 
-def generate_engagement_comments(
-    accounts: List[dict],
-    client: anthropic.Anthropic,
-) -> str:
-    """Use Claude to research recent posts and draft engagement comments."""
+def generate_engagement_comments(accounts: List[dict]) -> str:
+    """Draft engagement comments for target accounts' recent posts."""
     system_prompt = load_system_prompt()
 
     account_list = "\n".join(
@@ -70,14 +67,7 @@ def generate_engagement_comments(
         for a in accounts
     )
 
-    response = client.messages.create(
-        model="claude-sonnet-4-6",
-        max_tokens=4000,
-        system=system_prompt,
-        messages=[
-            {
-                "role": "user",
-                "content": f"""Draft engagement comments for @peptidealpharesearch to post on these accounts' recent content.
+    user_prompt = f"""Draft engagement comments for @peptidealpharesearch to post on these accounts' recent content.
 
 ## Target Accounts (prioritized)
 {account_list}
@@ -96,12 +86,9 @@ def generate_engagement_comments(
 - Tone: knowledgeable, curious, collegial — never promotional
 - Today: {datetime.now().strftime("%Y-%m-%d %H:%M")} EST
 
-Generate the full engagement queue in the format specified in your system prompt.""",
-            }
-        ],
-    )
+Generate the full engagement queue in the format specified in your system prompt."""
 
-    return response.content[0].text
+    return call_llm(system=system_prompt, user=user_prompt, max_tokens=4000)
 
 
 def load_existing_queue() -> str:
@@ -115,7 +102,6 @@ def run(append: bool = True) -> Path:
     Run the engagement agent and output comment drafts.
     If append=True, prepends new content to existing queue.
     """
-    client = anthropic.Anthropic(api_key=os.environ["ANTHROPIC_API_KEY"])
     competitors = load_competitors()
 
     print("[Engagement Agent] Identifying target accounts...")
@@ -123,7 +109,7 @@ def run(append: bool = True) -> Path:
     print(f"  Targeting {len(accounts)} accounts: {', '.join('@' + a['handle'] for a in accounts)}")
 
     print("  Researching recent posts and drafting comments...")
-    comments_content = generate_engagement_comments(accounts, client)
+    comments_content = generate_engagement_comments(accounts)
 
     # Build the output file
     timestamp = datetime.now().strftime("%Y-%m-%d %H:%M")
