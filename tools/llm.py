@@ -7,7 +7,10 @@ Set LLM_PROVIDER in .env to choose. Defaults to groq.
 
 import json
 import os
+import time
 import requests
+from requests.adapters import HTTPAdapter
+from urllib3.util.retry import Retry
 from typing import Optional
 
 PROVIDER = os.environ.get("LLM_PROVIDER", "groq").lower()
@@ -46,12 +49,27 @@ def call_llm(
 
 # ─── Groq (free tier — llama-3.3-70b-versatile) ───────────────────────────────
 
+def _groq_session() -> requests.Session:
+    """Build a requests session with retry + backoff for DNS/connection errors."""
+    session = requests.Session()
+    retry = Retry(
+        total=4,
+        backoff_factor=1,
+        status_forcelist=[429, 500, 502, 503, 504],
+        allowed_methods=["POST"],
+        raise_on_status=False,
+    )
+    session.mount("https://", HTTPAdapter(max_retries=retry))
+    return session
+
+
 def _call_groq(system: str, user: str, max_tokens: int) -> str:
     api_key = os.environ.get("GROQ_API_KEY")
     if not api_key:
         raise EnvironmentError("GROQ_API_KEY not set. Get a free key at console.groq.com")
 
-    resp = requests.post(
+    session = _groq_session()
+    resp = session.post(
         "https://api.groq.com/openai/v1/chat/completions",
         headers={
             "Authorization": f"Bearer {api_key}",
