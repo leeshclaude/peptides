@@ -170,26 +170,6 @@ def _run_ideation() -> tuple[str, list]:
     return new_ideas
 
 
-def _run_content(idea_rank: int) -> str:
-    sys.path.insert(0, str(REPO_ROOT))
-    from agents.content_agent import run
-    package_path = run(idea_rank=idea_rank)
-    package = json.loads(package_path.read_text())
-
-    lines = [f"Content ready: {package.get('design_title', '')}\n"]
-    for slide in package.get("slides", []):
-        header = slide.get("header", "")
-        body = slide.get("body", "")
-        lines.append(f"Slide {slide['slide_number']} [{slide.get('role', '')}]")
-        lines.append(header)
-        if body:
-            lines.append(body)
-        lines.append("")
-
-    lines.append(f"Caption preview:\n{package.get('caption', '')[:400]}...")
-    return "\n".join(lines)
-
-
 def _run_engagement() -> str:
     sys.path.insert(0, str(REPO_ROOT))
     from agents.engagement_agent import run
@@ -201,9 +181,6 @@ def _run_engagement() -> str:
         return content
     return "Engagement queue generated."
 
-
-def _approve_and_create(idea_rank: int) -> str:
-    return _run_content(idea_rank)
 
 
 # ─── Command Handlers ─────────────────────────────────────────────────────────
@@ -327,20 +304,25 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
     data = query.data
     if data.startswith("approve:"):
         rank = int(data.split(":")[1])
-        await query.edit_message_text(f"🎨 Generating content package for idea #{rank}... (1-2 minutes)")
 
-        loop = asyncio.get_event_loop()
         try:
-            result = await loop.run_in_executor(None, _approve_and_create, rank)
-            chunks = [result[i:i+4000] for i in range(0, min(len(result), 8000), 4000)]
-            await query.edit_message_text(f"✅ Content package ready for idea #{rank}!")
-            for chunk in chunks:
-                await query.message.reply_text(chunk[:4000])
-            await query.message.reply_text(
-                "Open Claude Code and say:\n\"Update Canva with the latest content package\""
+            cal = load_calendar()
+            idea = next((i for i in cal.get("ideas", []) if i.get("rank") == rank), None)
+            if not idea:
+                await query.edit_message_text(f"❌ Idea #{rank} not found in calendar.")
+                return
+
+            idea["status"] = "approved"
+            CALENDAR_FILE.write_text(json.dumps(cal, indent=2))
+
+            title = idea.get("title", "the topic")
+            await query.edit_message_text(
+                f"Idea #{rank} approved!\n\n"
+                f"Open Claude Code and say:\n"
+                f"Make a post about {title}"
             )
         except Exception as e:
-            await query.edit_message_text(f"❌ Content generation failed: {e}")
+            await query.edit_message_text(f"❌ Approve failed: {e}")
 
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
