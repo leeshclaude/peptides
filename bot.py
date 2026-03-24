@@ -25,7 +25,11 @@ from datetime import datetime
 from pathlib import Path
 from typing import Optional
 
+from pathlib import Path as _Path
 from dotenv import load_dotenv
+
+# Always load from the repo's own .env, overriding any inherited env vars
+load_dotenv(dotenv_path=_Path(__file__).parent / ".env", override=True)
 from telegram import (
     InlineKeyboardButton,
     InlineKeyboardMarkup,
@@ -38,8 +42,6 @@ from telegram.ext import (
     CommandHandler,
     ContextTypes,
 )
-
-load_dotenv()
 
 # ─── Config ───────────────────────────────────────────────────────────────────
 
@@ -386,6 +388,9 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 def main() -> None:
     print("Starting @peptidealpharesearch bot...")
     print(f"Authorised user: {ALLOWED_USER_ID}")
+    print(f"LLM provider: {os.environ.get('LLM_PROVIDER', 'groq')} / {os.environ.get('LLM_MODEL', 'default')}")
+    print(f"GROQ key loaded: {bool(os.environ.get('GROQ_API_KEY'))}")
+    print(f"ANTHROPIC key loaded: {bool(os.environ.get('ANTHROPIC_API_KEY'))}")
 
     app = Application.builder().token(BOT_TOKEN).build()
 
