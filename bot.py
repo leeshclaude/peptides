@@ -10,6 +10,12 @@ Commands:
   /list         — Show content calendar with approve buttons
   /engagement   — Run engagement agent → comment drafts
   /full         — Run research + ideation pipeline
+  /hooks        — Generate 5 hook variants for latest approved idea
+  /caption      — Write full caption + hashtags for latest approved idea
+  /repurpose    — Convert latest idea into Twitter thread + LinkedIn + Reel script
+  /trends       — Scan Reddit for trending peptide topics
+  /replies      — Draft replies for inbound comments
+  /analytics    — Generate performance analysis report
   /help         — Show commands
 
 Run: python bot.py
@@ -182,6 +188,68 @@ def _run_engagement() -> str:
     return "Engagement queue generated."
 
 
+def _run_hooks(rank: Optional[int] = None) -> str:
+    sys.path.insert(0, str(REPO_ROOT))
+    from agents.hook_tester_agent import run
+    variants = run(rank=rank)
+    lines = ["Hook Variants Generated\n"]
+    for v in variants:
+        lines.append(f"[{v['angle'].upper()}]\n{v['hook']}\n_{v['reasoning']}_\n")
+    return "\n".join(lines)
+
+
+def _run_caption(rank: Optional[int] = None) -> str:
+    sys.path.insert(0, str(REPO_ROOT))
+    from agents.caption_agent import run
+    path = run(rank=rank)
+    content = path.read_text()
+    if len(content) > 3800:
+        content = content[:3800] + "\n\n_...truncated. Full caption saved locally._"
+    return content
+
+
+def _run_repurpose(rank: Optional[int] = None) -> str:
+    sys.path.insert(0, str(REPO_ROOT))
+    from agents.repurpose_agent import run
+    out_dir = run(rank=rank)
+    lines = [f"Repurposed Content Ready\n\nFiles saved to: {out_dir.name}\n"]
+    for fname in ["twitter_thread.txt", "linkedin_post.txt", "reel_script.txt"]:
+        fpath = out_dir / fname
+        if fpath.exists():
+            lines.append(f"\n--- {fname} ---\n{fpath.read_text()[:600]}...\n")
+    return "\n".join(lines)[:4000]
+
+
+def _run_trends() -> str:
+    sys.path.insert(0, str(REPO_ROOT))
+    from agents.trend_spotter_agent import run
+    path = run()
+    content = path.read_text()
+    if len(content) > 3800:
+        content = content[:3800] + "\n\n_...truncated. Full report saved locally._"
+    return content
+
+
+def _run_replies() -> str:
+    sys.path.insert(0, str(REPO_ROOT))
+    from agents.community_manager_agent import run
+    path = run()
+    content = path.read_text()
+    if len(content) > 3800:
+        content = content[:3800] + "\n\n_...truncated. Full queue saved locally._"
+    return content
+
+
+def _run_analytics() -> str:
+    sys.path.insert(0, str(REPO_ROOT))
+    from agents.analytics_agent import run
+    path = run()
+    content = path.read_text()
+    if len(content) > 3800:
+        content = content[:3800] + "\n\n_...truncated. Full report saved locally._"
+    return content
+
+
 
 # ─── Command Handlers ─────────────────────────────────────────────────────────
 
@@ -192,12 +260,22 @@ async def cmd_start(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     text = (
         "@peptidealpharesearch Bot\n\n"
         "Your agent control panel.\n\n"
-        "/status — Pipeline health check\n"
+        "── Core Pipeline ──\n"
         "/research — Run research agent\n"
         "/ideation — Generate content ideas\n"
         "/list — View calendar + approve ideas\n"
-        "/engagement — Draft engagement comments\n"
-        "/full — Research + ideation pipeline\n"
+        "/full — Research + ideation pipeline\n\n"
+        "── Content ──\n"
+        "/hooks [rank] — Generate 5 hook variants\n"
+        "/caption [rank] — Write caption + hashtags\n"
+        "/repurpose [rank] — Twitter + LinkedIn + Reel\n\n"
+        "── Intelligence ──\n"
+        "/trends — Scan Reddit for niche trends\n"
+        "/engagement — Draft outbound comments\n"
+        "/replies — Draft replies to inbound comments\n"
+        "/analytics — Performance analysis report\n\n"
+        "── Utility ──\n"
+        "/status — Pipeline health check\n"
         "/help — Show this message"
     )
     await update.message.reply_text(text)
@@ -272,6 +350,96 @@ async def cmd_engagement(update: Update, context: ContextTypes.DEFAULT_TYPE) -> 
         await msg.edit_text(f"❌ Engagement agent failed: {e}")
 
 
+async def cmd_hooks(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if not is_allowed(update):
+        return await deny(update)
+
+    args = context.args
+    rank = int(args[0]) if args else None
+    msg = await update.message.reply_text(f"🎣 Generating hook variants{f' for #{rank}' if rank else ''}...")
+
+    loop = asyncio.get_event_loop()
+    try:
+        result = await loop.run_in_executor(None, lambda: _run_hooks(rank))
+        await msg.edit_text(result[:4000])
+    except Exception as e:
+        await msg.edit_text(f"❌ Hook tester failed: {e}")
+
+
+async def cmd_caption(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if not is_allowed(update):
+        return await deny(update)
+
+    args = context.args
+    rank = int(args[0]) if args else None
+    msg = await update.message.reply_text(f"✍️ Writing caption{f' for #{rank}' if rank else ''}...")
+
+    loop = asyncio.get_event_loop()
+    try:
+        result = await loop.run_in_executor(None, lambda: _run_caption(rank))
+        await msg.edit_text(result[:4000])
+    except Exception as e:
+        await msg.edit_text(f"❌ Caption agent failed: {e}")
+
+
+async def cmd_repurpose(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if not is_allowed(update):
+        return await deny(update)
+
+    args = context.args
+    rank = int(args[0]) if args else None
+    msg = await update.message.reply_text(f"♻️ Repurposing content{f' for #{rank}' if rank else ''}... (1-2 min)")
+
+    loop = asyncio.get_event_loop()
+    try:
+        result = await loop.run_in_executor(None, lambda: _run_repurpose(rank))
+        await msg.edit_text(result[:4000])
+    except Exception as e:
+        await msg.edit_text(f"❌ Repurpose agent failed: {e}")
+
+
+async def cmd_trends(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if not is_allowed(update):
+        return await deny(update)
+
+    msg = await update.message.reply_text("📈 Scanning Reddit for trends... (1-2 min)")
+
+    loop = asyncio.get_event_loop()
+    try:
+        result = await loop.run_in_executor(None, _run_trends)
+        await msg.edit_text(result[:4000])
+    except Exception as e:
+        await msg.edit_text(f"❌ Trend spotter failed: {e}")
+
+
+async def cmd_replies(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if not is_allowed(update):
+        return await deny(update)
+
+    msg = await update.message.reply_text("💬 Drafting comment replies...")
+
+    loop = asyncio.get_event_loop()
+    try:
+        result = await loop.run_in_executor(None, _run_replies)
+        await msg.edit_text(result[:4000])
+    except Exception as e:
+        await msg.edit_text(f"❌ Community manager failed: {e}")
+
+
+async def cmd_analytics(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    if not is_allowed(update):
+        return await deny(update)
+
+    msg = await update.message.reply_text("📊 Generating analytics report...")
+
+    loop = asyncio.get_event_loop()
+    try:
+        result = await loop.run_in_executor(None, _run_analytics)
+        await msg.edit_text(result[:4000])
+    except Exception as e:
+        await msg.edit_text(f"❌ Analytics agent failed: {e}")
+
+
 async def cmd_full(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
     if not is_allowed(update):
         return await deny(update)
@@ -344,6 +512,12 @@ def main() -> None:
     app.add_handler(CommandHandler("list",       cmd_list))
     app.add_handler(CommandHandler("engagement", cmd_engagement))
     app.add_handler(CommandHandler("full",       cmd_full))
+    app.add_handler(CommandHandler("hooks",      cmd_hooks))
+    app.add_handler(CommandHandler("caption",    cmd_caption))
+    app.add_handler(CommandHandler("repurpose",  cmd_repurpose))
+    app.add_handler(CommandHandler("trends",     cmd_trends))
+    app.add_handler(CommandHandler("replies",    cmd_replies))
+    app.add_handler(CommandHandler("analytics",  cmd_analytics))
     app.add_handler(CallbackQueryHandler(handle_callback))
 
     print("Bot running. Press Ctrl+C to stop.")
