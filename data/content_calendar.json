@@ -1,10 +1,824 @@
 {
-  "last_updated": null,
-  "generated_from_brief": null,
+  "last_updated": "2026-03-25T12:58:20.064091",
+  "generated_from_brief": "2026-03-24.md",
   "posting_schedule": {
-    "recommended_days": ["Tuesday", "Wednesday", "Thursday"],
-    "recommended_times_est": ["7:00am", "12:00pm", "7:00pm"],
+    "recommended_days": [
+      "Tuesday",
+      "Wednesday",
+      "Thursday"
+    ],
+    "recommended_times_est": [
+      "7:00am",
+      "12:00pm",
+      "7:00pm"
+    ],
     "frequency_per_week": 4
   },
-  "ideas": []
+  "ideas": [
+    {
+      "rank": 1,
+      "title": "Semaglutide Efficacy",
+      "pillar": "Research Breakdown",
+      "hook": "Semaglutide: 87% reduction",
+      "hook_subtext": "in body weight after 12 weeks",
+      "slide_outline": [
+        "Slide 1: Introduction to semaglutide",
+        "Slide 2: Mechanism of action",
+        "Slide 3: Efficacy in weight loss",
+        "Slide 4: Potential side effects",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about semaglutide",
+      "hashtags": [
+        "#semaglutide",
+        "#weightloss"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871707/",
+      "why_it_works": "High audience interest and medium scientific novelty",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 9.2,
+      "status": "pending",
+      "created_at": "2026-03-25T12:58:20.064100",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 2,
+      "title": "Peptide for Hair Strength",
+      "pillar": "Research Breakdown",
+      "hook": "25% increase in hair strength",
+      "hook_subtext": "with bio-active peptide after 4 weeks",
+      "slide_outline": [
+        "Slide 1: Introduction to hair strengthening peptides",
+        "Slide 2: Mechanism of action",
+        "Slide 3: Efficacy in hair strengthening",
+        "Slide 4: Potential applications",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Discover the science behind hair strengthening peptides",
+      "hashtags": [
+        "#peptides",
+        "#hairstrength"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41872001/",
+      "why_it_works": "High scientific novelty and audience interest",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 9.0,
+      "status": "content_ready",
+      "created_at": "2026-03-25T12:58:20.064101",
+      "brief_source": "2026-03-24.md",
+      "approved_at": "2026-03-25T12:58:31.253205",
+      "content_package_path": "/Users/leeshamcguiness/repos/peptides/data/content_packages/2026-03-25_peptide_for_hair_strength.json",
+      "content_ready_at": "2026-03-25T12:58:37.469741"
+    },
+    {
+      "rank": 3,
+      "title": "ROR1-Targeting Peptides for Cancer",
+      "pillar": "Research Breakdown",
+      "hook": "10:1 tumor-to-muscle ratio",
+      "hook_subtext": "with ROR1-targeting peptide-based ligand",
+      "slide_outline": [
+        "Slide 1: Introduction to ROR1-targeting peptides",
+        "Slide 2: Mechanism of action",
+        "Slide 3: Efficacy in cancer treatment",
+        "Slide 4: Potential applications",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about ROR1-targeting peptides",
+      "hashtags": [
+        "#ROR1",
+        "#cancer"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871276/",
+      "why_it_works": "High scientific novelty and potential for future developments",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 8.8,
+      "status": "pending",
+      "created_at": "2026-03-25T12:58:20.064102",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 4,
+      "title": "Structure-Aware Multimodal Learning",
+      "pillar": "Mechanism Explainer",
+      "hook": "15% improvement in signal peptide prediction",
+      "hook_subtext": "with structure-aware multimodal learning approach",
+      "slide_outline": [
+        "Slide 1: Introduction to signal peptide prediction",
+        "Slide 2: Mechanism of structure-aware multimodal learning",
+        "Slide 3: Efficacy in signal peptide prediction",
+        "Slide 4: Potential applications",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Discover the power of structure-aware multimodal learning",
+      "hashtags": [
+        "#signalpeptide",
+        "#machinelearning"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871315/",
+      "why_it_works": "High scientific novelty and potential for future developments",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 8.5,
+      "status": "pending",
+      "created_at": "2026-03-25T12:58:20.064103",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 5,
+      "title": "p53psi and Cancer Treatment",
+      "pillar": "Research Breakdown",
+      "hook": "30% reduction in tumor growth",
+      "hook_subtext": "with p53psi-expressing cells",
+      "slide_outline": [
+        "Slide 1: Introduction to p53psi",
+        "Slide 2: Mechanism of action",
+        "Slide 3: Efficacy in cancer treatment",
+        "Slide 4: Potential applications",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about p53psi and cancer treatment",
+      "hashtags": [
+        "#p53psi",
+        "#cancer"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871246/",
+      "why_it_works": "High scientific novelty and potential for future developments",
+      "recommended_post_day": "Friday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 8.2,
+      "status": "pending",
+      "created_at": "2026-03-25T12:58:20.064104",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 6,
+      "title": "Peptide Stacking for Anti-Aging",
+      "pillar": "Protocol Deep Dive",
+      "hook": "Maximize anti-aging benefits with peptide stacking",
+      "hook_subtext": "expert-approved protocols",
+      "slide_outline": [
+        "Slide 1: Introduction to peptide stacking",
+        "Slide 2: Mechanism of action",
+        "Slide 3: Efficacy in anti-aging",
+        "Slide 4: Potential applications",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Discover the art of peptide stacking for anti-aging",
+      "hashtags": [
+        "#peptidestacking",
+        "#antiaging"
+      ],
+      "source_material": "Reddit topic: Peptide stacking for anti-aging",
+      "why_it_works": "High audience interest and potential for future developments",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 8.0,
+      "status": "pending",
+      "created_at": "2026-03-25T12:58:20.064105",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 7,
+      "title": "Semaglutide Detection Methods",
+      "pillar": "Myth Busting",
+      "hook": "Accurate semaglutide detection: myth or reality?",
+      "hook_subtext": " Separating fact from fiction",
+      "slide_outline": [
+        "Slide 1: Introduction to semaglutide detection",
+        "Slide 2: Common misconceptions",
+        "Slide 3: Accurate detection methods",
+        "Slide 4: Potential applications",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Get the facts on semaglutide detection",
+      "hashtags": [
+        "#semaglutide",
+        "#detection"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871707/",
+      "why_it_works": "High audience interest and potential for myth-busting",
+      "recommended_post_day": "Friday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 7.8,
+      "status": "pending",
+      "created_at": "2026-03-25T12:58:20.064106",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 1,
+      "title": "Peptide for Hair Strength",
+      "pillar": "Research Breakdown",
+      "hook": "25% stronger hair",
+      "hook_subtext": "New study reveals peptide's effect on hair keratin",
+      "slide_outline": [
+        "Slide 1: Introduction to hair keratin",
+        "Slide 2: Study findings on peptide's effect",
+        "Slide 3: Mechanism of action",
+        "Slide 4: Potential applications",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about peptide-based hair strengthening",
+      "hashtags": [
+        "#peptides",
+        "#haircare"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41872001/",
+      "why_it_works": "This idea works because it addresses a common concern for many people, and the use of a specific percentage in the hook makes it more attention-grabbing",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 9.5,
+      "status": "approved",
+      "created_at": "2026-03-24T20:53:50.378567",
+      "brief_source": "2026-03-24.md",
+      "approved_at": "2026-03-25T12:09:03.580651"
+    },
+    {
+      "rank": 2,
+      "title": "Semaglutide for Weight Loss",
+      "pillar": "Protocol Deep Dive",
+      "hook": "10% weight loss in 12 weeks",
+      "hook_subtext": "Semaglutide's efficacy for weight loss",
+      "slide_outline": [
+        "Slide 1: Introduction to semaglutide",
+        "Slide 2: Study findings on semaglutide's effect on weight loss",
+        "Slide 3: Potential side effects and interactions",
+        "Slide 4: Comparison to other weight loss methods",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about semaglutide for weight loss",
+      "hashtags": [
+        "#semaglutide",
+        "#weightloss"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871707/",
+      "why_it_works": "This idea works because it addresses a highly relevant topic for the audience, and the use of a specific percentage in the hook makes it more attention-grabbing",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 9.2,
+      "status": "pending",
+      "created_at": "2026-03-24T20:53:50.378569",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 3,
+      "title": "ROR1-Targeting Peptides for Cancer",
+      "pillar": "Mechanism Explainer",
+      "hook": "10:1 tumor-to-muscle ratio",
+      "hook_subtext": "ROR1-targeting peptides' potential for cancer treatment",
+      "slide_outline": [
+        "Slide 1: Introduction to ROR1",
+        "Slide 2: Mechanism of action of ROR1-targeting peptides",
+        "Slide 3: Study findings on ROR1-targeting peptides' efficacy",
+        "Slide 4: Potential applications and future directions",
+        "Slide 5: Conclusion",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about ROR1-targeting peptides for cancer",
+      "hashtags": [
+        "#ROR1",
+        "#cancer"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871276/",
+      "why_it_works": "This idea works because it addresses a highly relevant topic for the audience, and the use of a specific ratio in the hook makes it more attention-grabbing",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 9.0,
+      "status": "pending",
+      "created_at": "2026-03-24T20:53:50.378570",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 4,
+      "title": "Structure-Aware Multimodal Learning",
+      "pillar": "Research Breakdown",
+      "hook": "15% improvement in signal peptide prediction",
+      "hook_subtext": "New study reveals the potential of structure-aware multimodal learning",
+      "slide_outline": [
+        "Slide 1: Introduction to signal peptide prediction",
+        "Slide 2: Study findings on structure-aware multimodal learning",
+        "Slide 3: Mechanism of action",
+        "Slide 4: Potential applications",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about structure-aware multimodal learning",
+      "hashtags": [
+        "#signalpeptide",
+        "#machinelearning"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871315/",
+      "why_it_works": "This idea works because it addresses a highly relevant topic for the audience, and the use of a specific percentage in the hook makes it more attention-grabbing",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 8.8,
+      "status": "pending",
+      "created_at": "2026-03-24T20:53:50.378570",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 5,
+      "title": "p53psi and Cancer Treatment",
+      "pillar": "Mechanism Explainer",
+      "hook": "30% reduction in tumor growth",
+      "hook_subtext": "p53psi's potential for cancer treatment",
+      "slide_outline": [
+        "Slide 1: Introduction to p53psi",
+        "Slide 2: Mechanism of action of p53psi",
+        "Slide 3: Study findings on p53psi's efficacy",
+        "Slide 4: Potential applications and future directions",
+        "Slide 5: Conclusion",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about p53psi for cancer treatment",
+      "hashtags": [
+        "#p53psi",
+        "#cancer"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871246/",
+      "why_it_works": "This idea works because it addresses a highly relevant topic for the audience, and the use of a specific percentage in the hook makes it more attention-grabbing",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 8.5,
+      "status": "pending",
+      "created_at": "2026-03-24T20:53:50.378571",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 6,
+      "title": "Peptide Stacking for Anti-Aging",
+      "pillar": "Protocol Deep Dive",
+      "hook": "Combining peptides for optimal results",
+      "hook_subtext": "The benefits and risks of peptide stacking for anti-aging",
+      "slide_outline": [
+        "Slide 1: Introduction to peptide stacking",
+        "Slide 2: Benefits and risks of peptide stacking",
+        "Slide 3: Potential interactions and side effects",
+        "Slide 4: Comparison to other anti-aging methods",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about peptide stacking for anti-aging",
+      "hashtags": [
+        "#peptidestacking",
+        "#antiaging"
+      ],
+      "source_material": "Reddit topic: Peptide stacking for anti-aging",
+      "why_it_works": "This idea works because it addresses a highly relevant topic for the audience, and the use of a specific phrase in the hook makes it more attention-grabbing",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 8.2,
+      "status": "pending",
+      "created_at": "2026-03-24T20:53:50.378572",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 7,
+      "title": "Semaglutide Detection Methods",
+      "pillar": "Research Breakdown",
+      "hook": "0.1 ng/mL detection limit",
+      "hook_subtext": "New study reveals semaglutide detection methods",
+      "slide_outline": [
+        "Slide 1: Introduction to semaglutide detection",
+        "Slide 2: Study findings on semaglutide detection methods",
+        "Slide 3: Mechanism of action",
+        "Slide 4: Potential applications",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action"
+      ],
+      "cta": "Learn more about semaglutide detection methods",
+      "hashtags": [
+        "#semaglutide",
+        "#detectionmethods"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871707/",
+      "why_it_works": "This idea works because it addresses a highly relevant topic for the audience, and the use of a specific value in the hook makes it more attention-grabbing",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 8.0,
+      "status": "pending",
+      "created_at": "2026-03-24T20:53:50.378573",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 1,
+      "title": "Semaglutide Efficacy",
+      "pillar": "Research Breakdown",
+      "hook": "Semaglutide: 15% weight loss",
+      "hook_subtext": "New study reveals semaglutide's potential for weight loss and diabetes management",
+      "slide_outline": [
+        "Slide 1: Introduction to semaglutide",
+        "Slide 2: Study results - 15% weight loss",
+        "Slide 3: Mechanism of action",
+        "Slide 4: Potential side effects",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action - consult a doctor"
+      ],
+      "cta": "Consult a doctor about semaglutide",
+      "hashtags": [
+        "#semaglutide",
+        "#weightloss",
+        "#diabetes"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871707/",
+      "why_it_works": "High audience interest and medium scientific novelty make this a compelling topic",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 9.2,
+      "status": "pending",
+      "created_at": "2026-03-24T20:43:30.677461",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 2,
+      "title": "Peptide Stacking for Anti-Aging",
+      "pillar": "Protocol Deep Dive",
+      "hook": "Stacking peptides for 30% skin improvement",
+      "hook_subtext": "Expert guidance on peptide stacking for anti-aging benefits",
+      "slide_outline": [
+        "Slide 1: Introduction to peptide stacking",
+        "Slide 2: Benefits of peptide stacking",
+        "Slide 3: Peptide combinations for anti-aging",
+        "Slide 4: Dosage and timing",
+        "Slide 5: Potential interactions and side effects",
+        "Slide 6: Call to action - consult a healthcare professional"
+      ],
+      "cta": "Consult a healthcare professional about peptide stacking",
+      "hashtags": [
+        "#peptidestacking",
+        "#antiaging",
+        "#longevity"
+      ],
+      "source_material": "Reddit topic - Peptide stacking for anti-aging",
+      "why_it_works": "High audience interest and lack of comprehensive content on peptide stacking make this a valuable resource",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 9.0,
+      "status": "content_ready",
+      "created_at": "2026-03-24T20:43:30.677462",
+      "brief_source": "2026-03-24.md",
+      "approved_at": "2026-03-24T20:44:02.148157",
+      "content_package_path": "/Users/leeshamcguiness/repos/peptides/data/content_packages/2026-03-24_peptide_stacking_for_anti-aging.json",
+      "content_ready_at": "2026-03-24T20:44:07.542455"
+    },
+    {
+      "rank": 3,
+      "title": "ROR1-Targeting Peptides for Cancer",
+      "pillar": "Research Breakdown",
+      "hook": "ROR1-targeting peptides: 10:1 tumor-to-muscle ratio",
+      "hook_subtext": "New study reveals promising results for ROR1-targeting peptides in cancer treatment",
+      "slide_outline": [
+        "Slide 1: Introduction to ROR1-targeting peptides",
+        "Slide 2: Study results - 10:1 tumor-to-muscle ratio",
+        "Slide 3: Mechanism of action",
+        "Slide 4: Potential applications",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action - stay updated on cancer research"
+      ],
+      "cta": "Stay updated on cancer research",
+      "hashtags": [
+        "#ROR1",
+        "#cancer",
+        "#peptides"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871276/",
+      "why_it_works": "Low scientific novelty but high potential for future developments make this a topic to watch",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 8.8,
+      "status": "pending",
+      "created_at": "2026-03-24T20:43:30.677463",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 4,
+      "title": "p53psi and Cancer Treatment",
+      "pillar": "Research Breakdown",
+      "hook": "p53psi: 30% reduction in tumor growth",
+      "hook_subtext": "New study reveals p53psi's potential as a therapeutic target for cancer treatment",
+      "slide_outline": [
+        "Slide 1: Introduction to p53psi",
+        "Slide 2: Study results - 30% reduction in tumor growth",
+        "Slide 3: Mechanism of action",
+        "Slide 4: Potential applications",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action - support cancer research"
+      ],
+      "cta": "Support cancer research",
+      "hashtags": [
+        "#p53psi",
+        "#cancer",
+        "#therapeutics"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871246/",
+      "why_it_works": "High scientific novelty and potential for cancer treatment make this a compelling topic",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 8.5,
+      "status": "pending",
+      "created_at": "2026-03-24T20:43:30.677464",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 5,
+      "title": "Semaglutide Detection Methods",
+      "pillar": "Myth Busting",
+      "hook": "Accurate semaglutide detection: 0.1 ng/mL limit",
+      "hook_subtext": "Debunking myths about semaglutide detection and its importance in diabetes management",
+      "slide_outline": [
+        "Slide 1: Introduction to semaglutide detection",
+        "Slide 2: Common myths about semaglutide detection",
+        "Slide 3: Importance of accurate detection",
+        "Slide 4: Current detection methods",
+        "Slide 5: Future developments",
+        "Slide 6: Call to action - consult a healthcare professional"
+      ],
+      "cta": "Consult a healthcare professional about semaglutide detection",
+      "hashtags": [
+        "#semaglutide",
+        "#detection",
+        "#diabetes"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871707/",
+      "why_it_works": "Medium scientific novelty and high audience interest make this a valuable topic for clarification",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 8.2,
+      "status": "pending",
+      "created_at": "2026-03-24T20:43:30.677464",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 6,
+      "title": "Peptide-Based ROR1-Targeting PET Ligands",
+      "pillar": "Mechanism Explainer",
+      "hook": "Peptide-based ROR1-targeting PET ligands: 10:1 tumor-to-muscle ratio",
+      "hook_subtext": "Explaining the mechanism of peptide-based ROR1-targeting PET ligands for cancer imaging",
+      "slide_outline": [
+        "Slide 1: Introduction to peptide-based ROR1-targeting PET ligands",
+        "Slide 2: Mechanism of action",
+        "Slide 3: Benefits of peptide-based ligands",
+        "Slide 4: Potential applications",
+        "Slide 5: Future developments",
+        "Slide 6: Call to action - stay updated on cancer research"
+      ],
+      "cta": "Stay updated on cancer research",
+      "hashtags": [
+        "#ROR1",
+        "#cancer",
+        "#PETligands"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871276/",
+      "why_it_works": "Low scientific novelty but high potential for future developments make this a topic to watch",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 8.0,
+      "status": "pending",
+      "created_at": "2026-03-24T20:43:30.677465",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 7,
+      "title": "Structure-Aware Multimodal Learning for Signal Peptide Prediction",
+      "pillar": "Research Breakdown",
+      "hook": "15% improvement in signal peptide prediction",
+      "hook_subtext": "New study reveals the potential of structure-aware multimodal learning for signal peptide prediction",
+      "slide_outline": [
+        "Slide 1: Introduction to signal peptide prediction",
+        "Slide 2: Study results - 15% improvement",
+        "Slide 3: Mechanism of action",
+        "Slide 4: Potential applications",
+        "Slide 5: Future directions",
+        "Slide 6: Call to action - support protein research"
+      ],
+      "cta": "Support protein research",
+      "hashtags": [
+        "#signalpeptide",
+        "#prediction",
+        "#proteins"
+      ],
+      "source_material": "https://pubmed.ncbi.nlm.nih.gov/41871315/",
+      "why_it_works": "High scientific novelty and potential for protein research make this a compelling topic",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 7.8,
+      "status": "pending",
+      "created_at": "2026-03-24T20:43:30.677466",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 1,
+      "title": "Peptide for Hair Strength",
+      "pillar": "Research Breakdown",
+      "hook": "25% stronger hair",
+      "hook_subtext": "New peptide study reveals promising results",
+      "slide_outline": [
+        "Slide 1: Introducing the hair-strengthening peptide",
+        "Slide 2: Study results: 25% increase in hair keratin strength",
+        "Slide 3: Mechanism of action: how the peptide works",
+        "Slide 4: Potential applications: hair loss and cosmetic treatments",
+        "Slide 5: Current limitations and future directions",
+        "Slide 6: Call to action: learn more about peptide-based therapies"
+      ],
+      "cta": "Learn more about peptide-based therapies",
+      "hashtags": [
+        "#peptides",
+        "#hairloss",
+        "#cosmetics"
+      ],
+      "source_material": "PubMed study on bio-active designed peptide for hair keratin strengthening",
+      "why_it_works": "The study's findings are significant and relevant to the audience's interest in cosmetic applications of peptides",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 9.5,
+      "status": "pending",
+      "created_at": "2026-03-24T20:30:18.206272",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 2,
+      "title": "Semaglutide for Weight Loss",
+      "pillar": "Protocol Deep Dive",
+      "hook": "Semaglutide: 15% weight loss in 12 weeks",
+      "hook_subtext": "Efficacy and safety of semaglutide for weight loss",
+      "slide_outline": [
+        "Slide 1: Introduction to semaglutide and its potential for weight loss",
+        "Slide 2: Study results: 15% weight loss in 12 weeks",
+        "Slide 3: Mechanism of action: how semaglutide works",
+        "Slide 4: Potential side effects and interactions",
+        "Slide 5: Current research and future directions",
+        "Slide 6: Call to action: consult with a healthcare professional"
+      ],
+      "cta": "Consult with a healthcare professional about semaglutide",
+      "hashtags": [
+        "#semaglutide",
+        "#weightloss",
+        "#obesity"
+      ],
+      "source_material": "PubMed study on semaglutide for weight loss",
+      "why_it_works": "The audience is interested in weight loss and semaglutide's potential, and the study's findings are significant and relevant",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 9.0,
+      "status": "pending",
+      "created_at": "2026-03-24T20:30:18.206274",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 3,
+      "title": "ROR1-Targeting Peptides for Cancer",
+      "pillar": "Mechanism Explainer",
+      "hook": "Targeting ROR1 for cancer treatment",
+      "hook_subtext": "The potential of peptide-based ligands for cancer therapy",
+      "slide_outline": [
+        "Slide 1: Introduction to ROR1 and its role in cancer",
+        "Slide 2: Mechanism of action: how ROR1-targeting peptides work",
+        "Slide 3: Current research and future directions",
+        "Slide 4: Potential applications: cancer treatment and diagnosis",
+        "Slide 5: Challenges and limitations",
+        "Slide 6: Call to action: learn more about cancer research"
+      ],
+      "cta": "Learn more about cancer research and ROR1-targeting peptides",
+      "hashtags": [
+        "#cancer",
+        "#ROR1",
+        "#peptides"
+      ],
+      "source_material": "PubMed study on peptide-based ROR1-targeting ligands for melanoma tumor imaging",
+      "why_it_works": "The audience is interested in cancer research and the potential of peptide-based therapies, and the study's findings are significant and relevant",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 8.5,
+      "status": "pending",
+      "created_at": "2026-03-24T20:30:18.206274",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 4,
+      "title": "Signal Peptide Prediction",
+      "pillar": "Research Breakdown",
+      "hook": "15% improvement in signal peptide prediction",
+      "hook_subtext": "The importance of accurate signal peptide prediction for protein function and disease diagnosis",
+      "slide_outline": [
+        "Slide 1: Introduction to signal peptides and their role in protein function",
+        "Slide 2: Study results: 15% improvement in signal peptide prediction",
+        "Slide 3: Mechanism of action: how the structure-aware multimodal learning approach works",
+        "Slide 4: Potential applications: disease diagnosis and treatment",
+        "Slide 5: Current limitations and future directions",
+        "Slide 6: Call to action: learn more about protein function and disease diagnosis"
+      ],
+      "cta": "Learn more about protein function and disease diagnosis",
+      "hashtags": [
+        "#proteins",
+        "#signalpeptides",
+        "#diseasediagnosis"
+      ],
+      "source_material": "PubMed study on structure-aware multimodal learning for minor-class signal peptide prediction",
+      "why_it_works": "The study's findings are significant and relevant to the audience's interest in protein function and disease diagnosis",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 8.0,
+      "status": "pending",
+      "created_at": "2026-03-24T20:30:18.206275",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 5,
+      "title": "p53psi and Cancer Treatment",
+      "pillar": "Mechanism Explainer",
+      "hook": "p53psi: a new target for cancer treatment",
+      "hook_subtext": "The potential of p53psi as a therapeutic target for cancer treatment",
+      "slide_outline": [
+        "Slide 1: Introduction to p53psi and its role in cancer",
+        "Slide 2: Mechanism of action: how p53psi works",
+        "Slide 3: Current research and future directions",
+        "Slide 4: Potential applications: cancer treatment and diagnosis",
+        "Slide 5: Challenges and limitations",
+        "Slide 6: Call to action: learn more about cancer research"
+      ],
+      "cta": "Learn more about cancer research and p53psi",
+      "hashtags": [
+        "#cancer",
+        "#p53psi",
+        "#therapeutictargets"
+      ],
+      "source_material": "PubMed study on the developmental and tumor-suppressive roles of p53psi",
+      "why_it_works": "The audience is interested in cancer research and the potential of new therapeutic targets, and the study's findings are significant and relevant",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 7.5,
+      "status": "pending",
+      "created_at": "2026-03-24T20:30:18.206276",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 6,
+      "title": "Peptide Stacking for Anti-Aging",
+      "pillar": "Protocol Deep Dive",
+      "hook": "Peptide stacking: the ultimate anti-aging protocol",
+      "hook_subtext": "The benefits and risks of peptide stacking for anti-aging",
+      "slide_outline": [
+        "Slide 1: Introduction to peptide stacking and its potential for anti-aging",
+        "Slide 2: Study results: benefits and risks of peptide stacking",
+        "Slide 3: Mechanism of action: how peptide stacking works",
+        "Slide 4: Potential interactions and side effects",
+        "Slide 5: Current research and future directions",
+        "Slide 6: Call to action: consult with a healthcare professional"
+      ],
+      "cta": "Consult with a healthcare professional about peptide stacking",
+      "hashtags": [
+        "#peptides",
+        "#antiaging",
+        "#stacking"
+      ],
+      "source_material": "Reddit discussion on peptide stacking for anti-aging",
+      "why_it_works": "The audience is interested in anti-aging and peptide stacking, and the discussion is relevant and timely",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 7.0,
+      "status": "pending",
+      "created_at": "2026-03-24T20:30:18.206277",
+      "brief_source": "2026-03-24.md"
+    },
+    {
+      "rank": 7,
+      "title": "Semaglutide Detection Methods",
+      "pillar": "Research Breakdown",
+      "hook": "Accurate semaglutide detection: a game-changer for diabetes management",
+      "hook_subtext": "The importance of accurate detection methods for semaglutide",
+      "slide_outline": [
+        "Slide 1: Introduction to semaglutide and its role in diabetes management",
+        "Slide 2: Study results: development of an electrochemiluminescence immunoassay for semaglutide detection",
+        "Slide 3: Mechanism of action: how the immunoassay works",
+        "Slide 4: Potential applications: diabetes management and research",
+        "Slide 5: Current limitations and future directions",
+        "Slide 6: Call to action: learn more about semaglutide and diabetes management"
+      ],
+      "cta": "Learn more about semaglutide and diabetes management",
+      "hashtags": [
+        "#semaglutide",
+        "#diabetes",
+        "#detectionmethods"
+      ],
+      "source_material": "PubMed study on the development of an electrochemiluminescence immunoassay for semaglutide detection",
+      "why_it_works": "The study's findings are significant and relevant to the audience's interest in diabetes management and semaglutide",
+      "recommended_post_day": "Friday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 6.5,
+      "status": "pending",
+      "created_at": "2026-03-24T20:30:18.206277",
+      "brief_source": "2026-03-24.md"
+    }
+  ]
 }
