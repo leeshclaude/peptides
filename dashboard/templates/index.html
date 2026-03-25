@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>@peptidealpharesearch — Pipeline Dashboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            gold: '#F5A623',
+            'gold-dark': '#c4831c',
+            surface: '#161616',
+            border: '#2a2a2a',
+          },
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+          },
+        },
+      },
+    };
+  </script>
+  <style>
+    body { background: #0d0d0d; color: #f5f5f5; font-family: 'Inter', sans-serif; }
+
+    /* Status badge pulse */
+    @keyframes pulse-dot {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.3; }
+    }
+    .pulse-running { animation: pulse-dot 1.2s ease-in-out infinite; }
+
+    /* Scrollable log */
+    .log-scroll { max-height: 320px; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #2a2a2a #0d0d0d; }
+    .log-scroll::-webkit-scrollbar { width: 6px; }
+    .log-scroll::-webkit-scrollbar-track { background: #0d0d0d; }
+    .log-scroll::-webkit-scrollbar-thumb { background: #2a2a2a; border-radius: 3px; }
+
+    /* Pipeline arrow */
+    .arrow { display: flex; align-items: center; color: #F5A623; font-size: 1.25rem; }
+
+    /* Fade-in for new log entries */
+    @keyframes fadein { from { opacity: 0; transform: translateY(-4px); } to { opacity: 1; transform: none; } }
+    .log-entry { animation: fadein 0.3s ease; }
+  </style>
+</head>
+<body class="min-h-screen">
+
+  <!-- Header -->
+  <header class="border-b border-border px-6 py-4 flex items-center justify-between">
+    <div class="flex items-center gap-3">
+      <span class="text-2xl">🧬</span>
+      <div>
+        <h1 class="text-lg font-semibold text-white">@peptidealpharesearch</h1>
+        <p class="text-xs text-gray-500">Multi-Agent Content Pipeline</p>
+      </div>
+    </div>
+    <div class="flex items-center gap-2 text-xs text-gray-500">
+      <span id="last-refresh" class="text-gray-600">Refreshing…</span>
+      <span class="w-2 h-2 rounded-full bg-green-500 pulse-running inline-block"></span>
+      <span>Live</span>
+    </div>
+  </header>
+
+  <main class="max-w-7xl mx-auto px-6 py-6 space-y-8">
+
+    <!-- Quick Stats Bar -->
+    <section id="stats-bar"
+      class="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-6 gap-3">
+      <!-- populated by JS -->
+    </section>
+
+    <!-- Agent Cards + Pipeline Flow -->
+    <section>
+      <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">Pipeline</h2>
+
+      <!-- Pipeline cards row -->
+      <div class="flex flex-wrap items-center gap-2" id="pipeline-row">
+        <!-- Research card -->
+        <div class="agent-card flex-1 min-w-[160px] bg-surface border border-border rounded-xl p-4 flex flex-col gap-3" data-agent="research">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">🔬</span>
+            <span class="status-badge text-xs px-2 py-0.5 rounded-full font-medium bg-gray-700 text-gray-400">idle</span>
+          </div>
+          <div>
+            <p class="font-semibold text-white text-sm">Research</p>
+            <p class="text-xs text-gray-500 mt-1 leading-relaxed">Fetches PubMed abstracts and builds daily research briefs</p>
+          </div>
+          <p class="text-xs text-gray-600 last-run">Never run</p>
+        </div>
+
+        <!-- Arrow Research → Ideation -->
+        <div class="arrow hidden md:flex">→</div>
+
+        <!-- Ideation card -->
+        <div class="agent-card flex-1 min-w-[160px] bg-surface border border-border rounded-xl p-4 flex flex-col gap-3" data-agent="ideation">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">💡</span>
+            <span class="status-badge text-xs px-2 py-0.5 rounded-full font-medium bg-gray-700 text-gray-400">idle</span>
+          </div>
+          <div>
+            <p class="font-semibold text-white text-sm">Ideation</p>
+            <p class="text-xs text-gray-500 mt-1 leading-relaxed">Scores research briefs and generates ranked content ideas</p>
+          </div>
+          <p class="text-xs text-gray-600 last-run">Never run</p>
+        </div>
+
+        <!-- Arrow Ideation → Content -->
+        <div class="arrow hidden md:flex">→</div>
+
+        <!-- Content card -->
+        <div class="agent-card flex-1 min-w-[160px] bg-surface border border-border rounded-xl p-4 flex flex-col gap-3" data-agent="content">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">🎨</span>
+            <span class="status-badge text-xs px-2 py-0.5 rounded-full font-medium bg-gray-700 text-gray-400">idle</span>
+          </div>
+          <div>
+            <p class="font-semibold text-white text-sm">Content</p>
+            <p class="text-xs text-gray-500 mt-1 leading-relaxed">Writes slide copy and generates Canva carousel designs</p>
+          </div>
+          <p class="text-xs text-gray-600 last-run">Never run</p>
+        </div>
+
+        <!-- Arrow Content → Canva -->
+        <div class="arrow hidden md:flex">→</div>
+
+        <!-- Canva node (terminal) -->
+        <div class="flex-1 min-w-[120px] bg-surface border border-border rounded-xl p-4 flex flex-col gap-3 opacity-70">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">🖼️</span>
+            <span class="text-xs px-2 py-0.5 rounded-full font-medium bg-gray-800 text-gray-500 border border-gray-700">output</span>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-300 text-sm">Canva</p>
+            <p class="text-xs text-gray-600 mt-1 leading-relaxed">Published carousel designs</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Engagement as parallel branch -->
+      <div class="mt-4 flex items-start gap-2">
+        <div class="hidden md:flex flex-col items-center pt-2 pl-6">
+          <div class="w-px h-4 bg-border"></div>
+          <div class="text-gold text-xs">↓ parallel</div>
+        </div>
+        <div class="agent-card w-full md:w-64 bg-surface border border-border rounded-xl p-4 flex flex-col gap-3 md:ml-6" data-agent="engagement">
+          <div class="flex items-center justify-between">
+            <span class="text-2xl">💬</span>
+            <span class="status-badge text-xs px-2 py-0.5 rounded-full font-medium bg-gray-700 text-gray-400">idle</span>
+          </div>
+          <div>
+            <p class="font-semibold text-white text-sm">Engagement</p>
+            <p class="text-xs text-gray-500 mt-1 leading-relaxed">Drafts comments for competitor posts to grow organic reach</p>
+          </div>
+          <p class="text-xs text-gray-600 last-run">Never run</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Content Calendar + Activity Log side by side -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+
+      <!-- Content Calendar -->
+      <section>
+        <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">Content Calendar</h2>
+        <div class="bg-surface border border-border rounded-xl overflow-hidden">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-border text-gray-500 text-xs uppercase tracking-wide">
+                <th class="px-4 py-3 text-left w-8">#</th>
+                <th class="px-4 py-3 text-left">Title</th>
+                <th class="px-4 py-3 text-left">Status</th>
+                <th class="px-4 py-3 text-right">Score</th>
+                <th class="px-4 py-3 text-left">Day</th>
+              </tr>
+            </thead>
+            <tbody id="calendar-tbody">
+              <tr><td colspan="5" class="px-4 py-6 text-center text-gray-600">Loading…</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- Activity Log -->
+      <section>
+        <h2 class="text-sm font-semibold text-gray-400 uppercase tracking-widest mb-4">Activity Log</h2>
+        <div class="bg-surface border border-border rounded-xl p-4">
+          <div class="log-scroll space-y-2" id="activity-log">
+            <p class="text-gray-600 text-xs">No activity yet.</p>
+          </div>
+        </div>
+      </section>
+
+    </div>
+
+  </main>
+
+  <script>
+    // ─── Helpers ────────────────────────────────────────────────────────────────
+
+    function statusBadgeHtml(status) {
+      const cfg = {
+        idle:          { bg: 'bg-gray-700',        text: 'text-gray-400',  dot: 'bg-gray-500',  label: 'idle' },
+        running:       { bg: 'bg-green-900',        text: 'text-green-300', dot: 'bg-green-400', label: 'running', pulse: true },
+        done:          { bg: 'bg-green-900/60',     text: 'text-green-400', dot: 'bg-green-500', label: 'done' },
+        error:         { bg: 'bg-red-900/60',       text: 'text-red-400',   dot: 'bg-red-500',   label: 'error' },
+      };
+      const c = cfg[status] || cfg.idle;
+      const pulseClass = c.pulse ? 'pulse-running' : '';
+      return `<span class="inline-flex items-center gap-1.5 text-xs px-2 py-0.5 rounded-full font-medium ${c.bg} ${c.text}">
+        <span class="w-1.5 h-1.5 rounded-full ${c.dot} ${pulseClass} inline-block"></span>
+        ${c.label}
+      </span>`;
+    }
+
+    function calStatusBadge(status) {
+      const cfg = {
+        pending:       'bg-yellow-900/60 text-yellow-400',
+        approved:      'bg-blue-900/60 text-blue-400',
+        content_ready: 'bg-green-900/60 text-green-400',
+        posted:        'bg-gray-700 text-gray-400',
+      };
+      const cls = cfg[status] || 'bg-gray-700 text-gray-400';
+      const label = status ? status.replace('_', ' ') : 'unknown';
+      return `<span class="text-xs px-2 py-0.5 rounded-full font-medium ${cls}">${label}</span>`;
+    }
+
+    const agentColors = {
+      research:   'text-purple-400',
+      ideation:   'text-yellow-400',
+      content:    'text-blue-400',
+      engagement: 'text-green-400',
+    };
+
+    const statusIcons = {
+      started: '▶',
+      done:    '✓',
+      error:   '✗',
+    };
+
+    function formatTs(isoStr) {
+      if (!isoStr) return '';
+      try {
+        const d = new Date(isoStr);
+        return d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      } catch(e) { return isoStr; }
+    }
+
+    // ─── Stats Bar ───────────────────────────────────────────────────────────────
+
+    function renderStats(stats) {
+      const items = [
+        { label: 'Brief age',      value: stats.brief_age,    color: 'text-gold' },
+        { label: 'Pending',        value: stats.pending,      color: 'text-yellow-400' },
+        { label: 'Approved',       value: stats.approved,     color: 'text-blue-400' },
+        { label: 'Content ready',  value: stats.content_ready,color: 'text-green-400' },
+        { label: 'Posted',         value: stats.posted,       color: 'text-gray-400' },
+        { label: 'Packages',       value: stats.packages,     color: 'text-purple-400' },
+      ];
+      const bar = document.getElementById('stats-bar');
+      bar.innerHTML = items.map(i => `
+        <div class="bg-surface border border-border rounded-xl px-4 py-3 flex flex-col gap-1">
+          <span class="text-xs text-gray-500 uppercase tracking-wide">${i.label}</span>
+          <span class="text-xl font-semibold ${i.color}">${i.value}</span>
+        </div>
+      `).join('');
+    }
+
+    // ─── Agent Cards ─────────────────────────────────────────────────────────────
+
+    function renderAgents(agents) {
+      agents.forEach(agent => {
+        const card = document.querySelector(`.agent-card[data-agent="${agent.id}"]`);
+        if (!card) return;
+        card.querySelector('.status-badge').outerHTML = statusBadgeHtml(agent.status);
+        // Re-query after replacing
+        const newBadge = card.querySelector('.status-badge');
+        if (newBadge) newBadge.outerHTML = statusBadgeHtml(agent.status);
+
+        card.querySelector('.last-run').textContent =
+          agent.last_run ? `Last run: ${agent.last_run_age}` : 'Never run';
+      });
+
+      // Replace all status badges properly
+      agents.forEach(agent => {
+        const card = document.querySelector(`.agent-card[data-agent="${agent.id}"]`);
+        if (!card) return;
+        const badge = card.querySelector('.status-badge');
+        if (badge) {
+          badge.outerHTML = statusBadgeHtml(agent.status);
+        }
+      });
+    }
+
+    // ─── Calendar ────────────────────────────────────────────────────────────────
+
+    function renderCalendar(rows) {
+      const tbody = document.getElementById('calendar-tbody');
+      if (!rows || rows.length === 0) {
+        tbody.innerHTML = '<tr><td colspan="5" class="px-4 py-6 text-center text-gray-600">No ideas yet.</td></tr>';
+        return;
+      }
+      tbody.innerHTML = rows.map((row, i) => `
+        <tr class="border-t border-border hover:bg-white/5 transition-colors">
+          <td class="px-4 py-3 text-gray-500 text-xs">${row.rank}</td>
+          <td class="px-4 py-3 text-white font-medium max-w-[180px] truncate">${row.title}</td>
+          <td class="px-4 py-3">${calStatusBadge(row.status)}</td>
+          <td class="px-4 py-3 text-right text-gray-400 text-xs">${row.score}</td>
+          <td class="px-4 py-3 text-gray-400 text-xs">${row.post_day}</td>
+        </tr>
+      `).join('');
+    }
+
+    // ─── Activity Log ────────────────────────────────────────────────────────────
+
+    function renderLog(entries) {
+      const container = document.getElementById('activity-log');
+      if (!entries || entries.length === 0) {
+        container.innerHTML = '<p class="text-gray-600 text-xs">No activity yet.</p>';
+        return;
+      }
+      container.innerHTML = entries.map(e => {
+        const agentCls = agentColors[e.agent] || 'text-gray-400';
+        const icon = statusIcons[e.status] || '·';
+        const iconCls = e.status === 'done' ? 'text-green-400' : e.status === 'error' ? 'text-red-400' : 'text-gray-400';
+        return `
+        <div class="log-entry flex items-start gap-2 py-1.5 border-b border-border/50 last:border-0">
+          <span class="text-gray-600 text-xs tabular-nums shrink-0 pt-0.5 w-20">${formatTs(e.ts)}</span>
+          <span class="${agentCls} text-xs font-medium shrink-0 w-20 capitalize">${e.agent || ''}</span>
+          <span class="${iconCls} text-xs shrink-0">${icon}</span>
+          <span class="text-gray-400 text-xs leading-relaxed">${e.message || ''}</span>
+        </div>`;
+      }).join('');
+    }
+
+    // ─── Main Poll ───────────────────────────────────────────────────────────────
+
+    async function fetchAndRender() {
+      try {
+        const res = await fetch('/api/status');
+        if (!res.ok) throw new Error(`HTTP ${res.status}`);
+        const data = await res.json();
+
+        renderStats(data.stats);
+        renderAgents(data.agents);
+        renderCalendar(data.calendar);
+        renderLog(data.activity_log);
+
+        document.getElementById('last-refresh').textContent =
+          'Updated ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit', second: '2-digit' });
+      } catch (err) {
+        console.error('Poll error:', err);
+      }
+    }
+
+    // Initial load + poll every 3s
+    fetchAndRender();
+    setInterval(fetchAndRender, 3000);
+  </script>
+</body>
+</html>
