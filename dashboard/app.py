@@ -9,7 +9,7 @@ from pathlib import Path
 
 from flask import Flask, jsonify, render_template
 
-app = Flask(__name__)
+app = Flask(__name__, template_folder=str(Path(__file__).parent / "templates"))
 
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "data"
@@ -125,7 +125,11 @@ def _load_calendar():
 
 @app.route("/")
 def index():
-    return render_template("index.html")
+    response = render_template("index.html")
+    from flask import make_response
+    resp = make_response(response)
+    resp.headers["Cache-Control"] = "no-store, no-cache, must-revalidate"
+    return resp
 
 
 @app.route("/api/status")

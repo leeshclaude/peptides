@@ -495,26 +495,19 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
 
 # ─── Dashboard server (runs in background thread) ─────────────────────────────
 
-def _start_dashboard() -> None:
-    """Start the Flask dashboard on port 5555 in a background thread."""
+def start_dashboard_thread() -> None:
+    """Launch the Flask dashboard as a subprocess so it has correct file paths."""
+    import subprocess
     try:
-        import importlib.util, sys as _sys
-        dashboard_path = REPO_ROOT / "dashboard" / "app.py"
-        spec = importlib.util.spec_from_file_location("dashboard_app", dashboard_path)
-        module = importlib.util.module_from_spec(spec)
-        spec.loader.exec_module(module)
-        # Silence Flask startup noise
-        import logging as _log
-        _log.getLogger("werkzeug").setLevel(_log.ERROR)
-        module.app.run(host="127.0.0.1", port=5555, debug=False, use_reloader=False)
+        subprocess.Popen(
+            [sys.executable, str(REPO_ROOT / "dashboard" / "app.py")],
+            cwd=str(REPO_ROOT),
+            stdout=subprocess.DEVNULL,
+            stderr=subprocess.DEVNULL,
+        )
+        print("Dashboard: http://localhost:5555")
     except Exception as e:
         print(f"[Dashboard] Could not start: {e}")
-
-
-def start_dashboard_thread() -> None:
-    t = threading.Thread(target=_start_dashboard, daemon=True, name="dashboard")
-    t.start()
-    print("Dashboard: http://localhost:5555")
 
 
 # ─── Main ─────────────────────────────────────────────────────────────────────
