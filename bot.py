@@ -493,6 +493,30 @@ async def handle_callback(update: Update, context: ContextTypes.DEFAULT_TYPE) ->
             await query.edit_message_text(f"❌ Approve failed: {e}")
 
 
+# ─── Dashboard server (runs in background thread) ─────────────────────────────
+
+def _start_dashboard() -> None:
+    """Start the Flask dashboard on port 5555 in a background thread."""
+    try:
+        import importlib.util, sys as _sys
+        dashboard_path = REPO_ROOT / "dashboard" / "app.py"
+        spec = importlib.util.spec_from_file_location("dashboard_app", dashboard_path)
+        module = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(module)
+        # Silence Flask startup noise
+        import logging as _log
+        _log.getLogger("werkzeug").setLevel(_log.ERROR)
+        module.app.run(host="127.0.0.1", port=5555, debug=False, use_reloader=False)
+    except Exception as e:
+        print(f"[Dashboard] Could not start: {e}")
+
+
+def start_dashboard_thread() -> None:
+    t = threading.Thread(target=_start_dashboard, daemon=True, name="dashboard")
+    t.start()
+    print("Dashboard: http://localhost:5555")
+
+
 # ─── Main ─────────────────────────────────────────────────────────────────────
 
 def main() -> None:
@@ -501,6 +525,8 @@ def main() -> None:
     print(f"LLM provider: {os.environ.get('LLM_PROVIDER', 'groq')} / {os.environ.get('LLM_MODEL', 'default')}")
     print(f"GROQ key loaded: {bool(os.environ.get('GROQ_API_KEY'))}")
     print(f"ANTHROPIC key loaded: {bool(os.environ.get('ANTHROPIC_API_KEY'))}")
+
+    start_dashboard_thread()
 
     app = Application.builder().token(BOT_TOKEN).build()
 
