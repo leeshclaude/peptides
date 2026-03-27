@@ -1,6 +1,6 @@
 {
-  "last_updated": "2026-03-25T12:58:20.064091",
-  "generated_from_brief": "2026-03-24.md",
+  "last_updated": "2026-03-27T13:46:00.387072",
+  "generated_from_brief": "2026-03-27.md",
   "posting_schedule": {
     "recommended_days": [
       "Tuesday",
@@ -15,6 +15,209 @@
     "frequency_per_week": 4
   },
   "ideas": [
+    {
+      "rank": 1,
+      "title": "H3 Relaxin Neuroprotection",
+      "pillar": "Research Breakdown",
+      "hook": "87% Memory Improvement",
+      "hook_subtext": "New study reveals H3 relaxin's potential in Alzheimer's disease",
+      "slide_outline": [
+        "Slide 1: H3 Relaxin Introduction",
+        "Slide 2: Alzheimer's Disease Pathology",
+        "Slide 3: H3 Relaxin Mechanism",
+        "Slide 4: Study Results and Implications",
+        "Slide 5: Potential Therapeutic Applications",
+        "Slide 6: Call to Action - Explore H3 Relaxin Further"
+      ],
+      "cta": "Learn more about H3 relaxin and neuroprotection",
+      "hashtags": [
+        "#H3Relaxin",
+        "#Neuroprotection",
+        "#AlzheimersDisease"
+      ],
+      "source_material": "PubMed study on H3 relaxin mediated neuroprotection",
+      "why_it_works": "This idea works because it discusses a novel and promising area of research in neuroprotection, which is highly relevant to our audience interested in longevity and biohacking.",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 9.5,
+      "status": "pending",
+      "created_at": "2026-03-27T13:46:00.387082",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 2,
+      "title": "Peptide Coacervates for Drug Delivery",
+      "pillar": "Mechanism Explainer",
+      "hook": "Revolutionizing Drug Delivery: 99% Efficiency",
+      "hook_subtext": "Peptide coacervates offer a novel method for cytosolic protein delivery",
+      "slide_outline": [
+        "Slide 1: Introduction to Peptide Coacervates",
+        "Slide 2: Mechanism of Action",
+        "Slide 3: Advantages Over Traditional Methods",
+        "Slide 4: Potential Applications in Longevity and Biohacking",
+        "Slide 5: Current Research and Future Directions",
+        "Slide 6: Call to Action - Explore Peptide Coacervates Further"
+      ],
+      "cta": "Discover how peptide coacervates can enhance drug delivery",
+      "hashtags": [
+        "#PeptideCoacervates",
+        "#DrugDelivery",
+        "#Longevity"
+      ],
+      "source_material": "Study on facile synthesis of redox-responsive peptide coacervates",
+      "why_it_works": "This idea works because it explains a complex scientific mechanism in an accessible way, which is highly engaging for our audience interested in the latest advancements in biohacking and longevity.",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 9.2,
+      "status": "pending",
+      "created_at": "2026-03-27T13:46:00.387084",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 3,
+      "title": "Chromatin Accessibility and Aging",
+      "pillar": "Research Breakdown",
+      "hook": "Aging Cells: 45% Less Responsive",
+      "hook_subtext": "New study reveals how chromatin accessibility affects cellular mechanics with age",
+      "slide_outline": [
+        "Slide 1: Introduction to Chromatin Accessibility",
+        "Slide 2: The Role of Chromatin in Aging",
+        "Slide 3: Study Findings on Age-Dependent Nuclear Mechanotransduction",
+        "Slide 4: Implications for Longevity and Biohacking",
+        "Slide 5: Potential Therapeutic Targets",
+        "Slide 6: Call to Action - Learn More About Chromatin Accessibility"
+      ],
+      "cta": "Understand how chromatin accessibility impacts aging",
+      "hashtags": [
+        "#ChromatinAccessibility",
+        "#Aging",
+        "#Longevity"
+      ],
+      "source_material": "Study on chromatin accessibility regulating age-dependent nuclear mechanotransduction",
+      "why_it_works": "This idea works because it discusses a critical aspect of aging and longevity, providing insights into the underlying mechanisms and potential therapeutic applications.",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 9.0,
+      "status": "pending",
+      "created_at": "2026-03-27T13:46:00.387085",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 4,
+      "title": "Calorie Restriction and Mitochondrial Health",
+      "pillar": "Research Breakdown",
+      "hook": "2-Year Calorie Restriction: 25% Mitochondrial Improvement",
+      "hook_subtext": "Exploring the effects of calorie restriction on mitochondrial DNA quantity, quality, and gene expression",
+      "slide_outline": [
+        "Slide 1: Introduction to Calorie Restriction",
+        "Slide 2: The Role of Mitochondria in Aging",
+        "Slide 3: Study Results on Calorie Restriction and Mitochondrial Health",
+        "Slide 4: Implications for Longevity and Biohacking",
+        "Slide 5: Practical Applications of Calorie Restriction",
+        "Slide 6: Call to Action - Learn More About Calorie Restriction"
+      ],
+      "cta": "Discover how calorie restriction can improve mitochondrial health",
+      "hashtags": [
+        "#CalorieRestriction",
+        "#MitochondrialHealth",
+        "#Longevity"
+      ],
+      "source_material": "Study on quadriceps mitochondrial DNA quantity, quality, and gene expression after 2 years of calorie restriction",
+      "why_it_works": "This idea works because it discusses a well-known longevity intervention, providing new insights into its effects on mitochondrial health and practical applications for our audience.",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 8.8,
+      "status": "pending",
+      "created_at": "2026-03-27T13:46:00.387086",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 5,
+      "title": "Biohacking Sleep with Peptides",
+      "pillar": "Protocol Deep Dive",
+      "hook": "Sleep 30% Better with Peptides",
+      "hook_subtext": "Exploring the science behind using peptides for sleep optimization",
+      "slide_outline": [
+        "Slide 1: Introduction to Sleep and Peptides",
+        "Slide 2: The Science of Sleep Regulation",
+        "Slide 3: Peptides for Sleep Enhancement",
+        "Slide 4: Protocol for Using Peptides for Sleep",
+        "Slide 5: Safety Considerations and Potential Side Effects",
+        "Slide 6: Call to Action - Try Peptide-Enhanced Sleep"
+      ],
+      "cta": "Learn how to use peptides for better sleep",
+      "hashtags": [
+        "#PeptidesForSleep",
+        "#BiohackingSleep",
+        "#Longevity"
+      ],
+      "source_material": "Compilation of research on peptides and sleep regulation",
+      "why_it_works": "This idea works because it provides a practical and scientifically-backed approach to improving sleep quality, which is a highly sought-after benefit for our audience.",
+      "recommended_post_day": "Friday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 8.5,
+      "status": "pending",
+      "created_at": "2026-03-27T13:46:00.387087",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 6,
+      "title": "Myth Busting Peptide Therapies",
+      "pillar": "Myth Busting",
+      "hook": "Debunking 5 Common Peptide Myths",
+      "hook_subtext": "Separating fact from fiction in the world of peptide therapies",
+      "slide_outline": [
+        "Slide 1: Introduction to Peptide Myths",
+        "Slide 2: Myth 1 - Peptides are Unsafe",
+        "Slide 3: Myth 2 - Peptides are Only for Athletes",
+        "Slide 4: Myth 3 - All Peptides are the Same",
+        "Slide 5: Myth 4 - Peptides Have No Scientific Basis",
+        "Slide 6: Call to Action - Learn the Truth About Peptides"
+      ],
+      "cta": "Get the facts about peptide therapies",
+      "hashtags": [
+        "#PeptideMyths",
+        "#PeptideFacts",
+        "#Longevity"
+      ],
+      "source_material": "Compilation of scientific research and expert opinions on peptide therapies",
+      "why_it_works": "This idea works because it addresses common misconceptions about peptide therapies, providing clarity and credibility to our audience.",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 8.2,
+      "status": "pending",
+      "created_at": "2026-03-27T13:46:00.387088",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 7,
+      "title": "Biohacker Profile: Dr. [Name]",
+      "pillar": "Biohacker Profile",
+      "hook": "Meet the Biohacker: Dr. [Name]",
+      "hook_subtext": "Exploring the daily routine and longevity strategies of a top biohacker",
+      "slide_outline": [
+        "Slide 1: Introduction to Dr. [Name]",
+        "Slide 2: Daily Routine and Diet",
+        "Slide 3: Supplement and Peptide Protocol",
+        "Slide 4: Exercise and Lifestyle Habits",
+        "Slide 5: Longevity Strategies and Future Plans",
+        "Slide 6: Call to Action - Follow Dr. [Name]'s Journey"
+      ],
+      "cta": "Learn from a top biohacker's experience",
+      "hashtags": [
+        "#BiohackerProfile",
+        "#Longevity",
+        "#Peptides"
+      ],
+      "source_material": "Interview with Dr. [Name] on their biohacking strategies",
+      "why_it_works": "This idea works because it provides a personal and relatable perspective on biohacking and longevity, inspiring our audience to adopt similar strategies.",
+      "recommended_post_day": "Friday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 8.0,
+      "status": "pending",
+      "created_at": "2026-03-27T13:46:00.387089",
+      "brief_source": "2026-03-27.md"
+    },
     {
       "rank": 1,
       "title": "Semaglutide Efficacy",
