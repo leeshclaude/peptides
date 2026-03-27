@@ -1,8 +1,36 @@
+# ── Secrets ───────────────────────────────────────────────────────────────────
 .env
+.ssh/
+
+# ── macOS ─────────────────────────────────────────────────────────────────────
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# ── Python ────────────────────────────────────────────────────────────────────
 __pycache__/
 *.pyc
 *.pyo
-.DS_Store
+*.pyd
+.Python
+*.egg-info/
+dist/
+build/
+
+# ── Generated agent output (data/) ────────────────────────────────────────────
 data/research_briefs/*.md
-data/engagement_queue.md
 data/content_packages/
+data/engagement_queue.md
+data/reply_queue.md
+data/trend_alerts.md
+data/activity_log.jsonl
+data/captions/
+data/repurposed/
+data/analytics/report_*.md
+
+# Keep these data files tracked (manually maintained)
+!data/analytics/posts.json
+!data/inbound_comments.json
+!data/content_calendar.json
+!data/brand_guidelines.md
+!data/competitor_accounts.json

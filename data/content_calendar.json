@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-03-27T13:46:00.387072",
+  "last_updated": "2026-03-27T13:57:03.541159",
   "generated_from_brief": "2026-03-27.md",
   "posting_schedule": {
     "recommended_days": [
@@ -15,6 +15,209 @@
     "frequency_per_week": 4
   },
   "ideas": [
+    {
+      "rank": 1,
+      "title": "Relaxin Neuroprotection",
+      "pillar": "Research Breakdown",
+      "hook": "87% Reduction in Alzheimer's Pathology",
+      "hook_subtext": "New study reveals relaxin's neuroprotective effects",
+      "slide_outline": [
+        "Slide 1: Introduction to relaxin's neuroprotective effects",
+        "Slide 2: Mechanism of action - PI3K/Akt-mTOR signaling pathway",
+        "Slide 3: Study results - 87% reduction in Alzheimer's pathology",
+        "Slide 4: Potential therapeutic applications",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action - learn more about peptide therapy"
+      ],
+      "cta": "Learn more about relaxin's neuroprotective effects",
+      "hashtags": [
+        "#peptides",
+        "#neuroprotection",
+        "#alzheimers"
+      ],
+      "source_material": "2026 study on relaxin's neuroprotective effects",
+      "why_it_works": "The study's findings are significant and relevant to the audience's interest in neuroprotection and peptide therapy",
+      "recommended_post_day": "Tuesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 9.5,
+      "status": "pending",
+      "created_at": "2026-03-27T13:57:03.541213",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 2,
+      "title": "Peptide Coacervates for Drug Delivery",
+      "pillar": "Mechanism Explainer",
+      "hook": "Redox-Responsive Peptide Coacervates: 3x More Effective",
+      "hook_subtext": "New study reveals the potential of peptide coacervates in drug delivery",
+      "slide_outline": [
+        "Slide 1: Introduction to peptide coacervates",
+        "Slide 2: Mechanism of action - redox-responsive delivery",
+        "Slide 3: Study results - 3x more effective than traditional methods",
+        "Slide 4: Potential applications in drug delivery",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action - learn more about peptide coacervates"
+      ],
+      "cta": "Learn more about peptide coacervates for drug delivery",
+      "hashtags": [
+        "#peptides",
+        "#drugdelivery",
+        "#coacervates"
+      ],
+      "source_material": "2026 study on peptide coacervates for drug delivery",
+      "why_it_works": "The study's findings are significant and relevant to the audience's interest in peptide therapy and drug delivery",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 9.0,
+      "status": "pending",
+      "created_at": "2026-03-27T13:57:03.541217",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 3,
+      "title": "Annexin A1 for Neuroprotection",
+      "pillar": "Research Breakdown",
+      "hook": "Annexin A1: The Neuroprotective Peptide You Need to Know",
+      "hook_subtext": "New study reveals the potential of Annexin A1 in neuroprotection",
+      "slide_outline": [
+        "Slide 1: Introduction to Annexin A1",
+        "Slide 2: Mechanism of action - neuroprotection and anti-inflammation",
+        "Slide 3: Study results - significant reduction in neurodegeneration",
+        "Slide 4: Potential therapeutic applications",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action - learn more about Annexin A1"
+      ],
+      "cta": "Learn more about Annexin A1 for neuroprotection",
+      "hashtags": [
+        "#peptides",
+        "#neuroprotection",
+        "#annexina1"
+      ],
+      "source_material": "2026 study on Annexin A1 for neuroprotection",
+      "why_it_works": "The study's findings are significant and relevant to the audience's interest in neuroprotection and peptide therapy",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 8.5,
+      "status": "pending",
+      "created_at": "2026-03-27T13:57:03.541219",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 4,
+      "title": "MIP2 for Neuroinflammation",
+      "pillar": "Research Breakdown",
+      "hook": "MIP2: The Peptide That Reduces Neuroinflammation by 75%",
+      "hook_subtext": "New study reveals the potential of MIP2 in reducing neuroinflammation",
+      "slide_outline": [
+        "Slide 1: Introduction to MIP2",
+        "Slide 2: Mechanism of action - anti-inflammatory effects",
+        "Slide 3: Study results - 75% reduction in neuroinflammation",
+        "Slide 4: Potential therapeutic applications",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action - learn more about MIP2"
+      ],
+      "cta": "Learn more about MIP2 for neuroinflammation",
+      "hashtags": [
+        "#peptides",
+        "#neuroinflammation",
+        "#mip2"
+      ],
+      "source_material": "2026 study on MIP2 for neuroinflammation",
+      "why_it_works": "The study's findings are significant and relevant to the audience's interest in neuroprotection and peptide therapy",
+      "recommended_post_day": "Friday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 8.0,
+      "status": "pending",
+      "created_at": "2026-03-27T13:57:03.541221",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 5,
+      "title": "Personalized Longevity Strategies",
+      "pillar": "Biohacker Profile",
+      "hook": "Increase Your Lifespan by 10 Years with Personalized Longevity",
+      "hook_subtext": "Expert biohackers share their strategies for personalized longevity",
+      "slide_outline": [
+        "Slide 1: Introduction to personalized longevity",
+        "Slide 2: Expert biohacker profiles and strategies",
+        "Slide 3: Common themes and takeaways",
+        "Slide 4: Creating a personalized longevity plan",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action - learn more about personalized longevity"
+      ],
+      "cta": "Learn more about personalized longevity strategies",
+      "hashtags": [
+        "#longevity",
+        "#biohacking",
+        "#personalized"
+      ],
+      "source_material": "Expert biohacker interviews and profiles",
+      "why_it_works": "The audience is interested in personalized longevity strategies and biohacking",
+      "recommended_post_day": "Wednesday",
+      "recommended_post_time_est": "7:00am",
+      "priority_score": 7.5,
+      "status": "pending",
+      "created_at": "2026-03-27T13:57:03.541223",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 6,
+      "title": "Nootropic Stacks for Cognitive Enhancement",
+      "pillar": "Protocol Deep Dive",
+      "hook": "Unlock Your Brain's Potential with These 3 Nootropic Stacks",
+      "hook_subtext": "Expert-approved nootropic stacks for cognitive enhancement",
+      "slide_outline": [
+        "Slide 1: Introduction to nootropic stacks",
+        "Slide 2: Stack 1 - focus and concentration",
+        "Slide 3: Stack 2 - memory and learning",
+        "Slide 4: Stack 3 - mood and motivation",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action - learn more about nootropic stacks"
+      ],
+      "cta": "Learn more about nootropic stacks for cognitive enhancement",
+      "hashtags": [
+        "#nootropics",
+        "#cognitiveenhancement",
+        "#stacks"
+      ],
+      "source_material": "Expert-approved nootropic stacks and protocols",
+      "why_it_works": "The audience is interested in nootropic stacks and cognitive enhancement",
+      "recommended_post_day": "Thursday",
+      "recommended_post_time_est": "12:00pm",
+      "priority_score": 7.0,
+      "status": "pending",
+      "created_at": "2026-03-27T13:57:03.541225",
+      "brief_source": "2026-03-27.md"
+    },
+    {
+      "rank": 7,
+      "title": "Peptide Therapy for Muscle Growth and Recovery",
+      "pillar": "Myth Busting",
+      "hook": "Debunking the Myths: Peptide Therapy for Muscle Growth",
+      "hook_subtext": "Separating fact from fiction in peptide therapy for muscle growth",
+      "slide_outline": [
+        "Slide 1: Introduction to peptide therapy for muscle growth",
+        "Slide 2: Common myths and misconceptions",
+        "Slide 3: Scientific evidence and studies",
+        "Slide 4: Potential benefits and risks",
+        "Slide 5: Conclusion and future directions",
+        "Slide 6: Call to action - learn more about peptide therapy"
+      ],
+      "cta": "Learn more about peptide therapy for muscle growth and recovery",
+      "hashtags": [
+        "#peptides",
+        "#muscle growth",
+        "#recovery"
+      ],
+      "source_material": "Scientific studies and expert opinions",
+      "why_it_works": "The audience is interested in peptide therapy for muscle growth and recovery, and myth-busting content is engaging and informative",
+      "recommended_post_day": "Friday",
+      "recommended_post_time_est": "7:00pm",
+      "priority_score": 6.5,
+      "status": "pending",
+      "created_at": "2026-03-27T13:57:03.541227",
+      "brief_source": "2026-03-27.md"
+    },
     {
       "rank": 1,
       "title": "H3 Relaxin Neuroprotection",

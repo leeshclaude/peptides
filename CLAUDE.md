@@ -263,3 +263,7 @@ When the user says "Make a post about [title]":
 6. Update idea status to `content_ready` in the calendar
 7. Log completion with `tools/activity_log.log()`
 8. Commit and push to git
+
+## Additional Tasks
+
+After completing each task, [CLAUDE.md](CLAUDE.md), [ROADMAP.md](../ROADMAP.md) and [README.md](../README.md) should be updated to reflect all changes.
